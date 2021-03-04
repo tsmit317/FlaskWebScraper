@@ -1,0 +1,3 @@
+[submodule "WebScraper"]
+	path = WebScraper
+	url = https://github.com/tsmit317/WebScraper.git
