@@ -1,1 +1,0 @@
-from WebScraper import toCSV
