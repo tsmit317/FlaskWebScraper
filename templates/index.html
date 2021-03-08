@@ -6,7 +6,7 @@
 {% block body %}
 
 <div>
-    <table class = "beech">
+    <table>
         <tr>
             <thead>Ski Beech</thead>
         </tr>
@@ -44,8 +44,8 @@
 
     <br>
     <br>
-    
-    <table class = "cataloochee">
+
+    <table>
         <tr>
             <thead>Cataloochee Ski Area</thead>
         </tr>
@@ -81,5 +81,44 @@
         {%endfor%}
     </table>
 
+    <br>
+    <br>
 
+    <table>
+        <tr>
+            <thead>Appalachian Ski Resort</thead>
+        </tr>
+        <tr>
+            <th>Conditon</th>
+            <th>Status</th>
+        </tr>
+        {% for cond in appCond %}
+        <tr>
+            <td>{{cond.name}}</td>
+            <td>{{cond.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Slope Name</th>
+            <th>Status</th>
+        </tr>
+        {% for slope in appSlope %}
+        <tr>
+            <td>{{slope.name}}</td>
+            <td>{{slope.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Lift Name</th>
+            <th>Status</th>
+        </tr>
+        {% for lift in appLift%}
+        <tr>
+            <td>{{lift.name}}</td>
+            <td>{{lift.status}}</td>
+        </tr>    
+        {%endfor%}
+    </table>
+
+</div>
 {% endblock %}

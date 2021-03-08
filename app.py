@@ -31,6 +31,9 @@ def delete_everthing(modelToDelete):
 
 @app.route('/')
 def index():
+    appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
+    appSlope = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="slope").all()
+    appLift = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="lift").all()
     cataCond = ResortDB.query.filter(ResortDB.resort == "Cata").filter(ResortDB.slc=="cond").all()
     cataSlope = ResortDB.query.filter(ResortDB.resort == "Cata").filter(ResortDB.slc=="slope").all()
     cataLift  = ResortDB.query.filter(ResortDB.resort == "Cata").filter(ResortDB.slc=="lift").all()
@@ -41,6 +44,7 @@ def index():
    
     
     return render_template('index.html', 
+                            appCond = appCond, appLift = appLift, appSlope = appSlope,
                             cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope,
                             beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope)
 
@@ -49,9 +53,14 @@ def index():
 if __name__ == '__main__':
     db.create_all()
     delete_everthing(ResortDB)
+    populate_db_conditions(appWS.get_conditions_dict(), "App", "cond")
+    populate_db_conditions(appWS.get_slope_dict(), "App", "slope")
+    populate_db_conditions(appWS.get_lift_dict(), "App", "lift")
+    
     populate_db_conditions(cataWS.get_slope_dict(), "Cata", "slope")
     populate_db_conditions(cataWS.get_conditions_dict(), "Cata", "cond")
     populate_db_conditions(cataWS.get_lift_dict(), "Cata", "lift")
+
     populate_db_conditions(beechWS.get_conditions_dict(), "Ski Beech", "cond")
     populate_db_conditions(beechWS.get_lift_dict(), "Ski Beech", "lift")
     populate_db_conditions(beechWS.get_slope_dict(), "Ski Beech", "slope")
