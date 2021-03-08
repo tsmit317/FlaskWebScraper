@@ -40,13 +40,18 @@ def index():
     beechCond = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="cond").all()
     beechSlope = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="slope").all()
     beechLift = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="lift").all()
-  
+
+    sugarCond = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="cond").all()
+    suagrSlope = ResortDB.query.filter(ResortDB.resort == "Ski Suagr").filter(ResortDB.slc=="slope").all()
+    sugarLift = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="lift").all()
+    
    
     
     return render_template('index.html', 
                             appCond = appCond, appLift = appLift, appSlope = appSlope,
                             cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope,
-                            beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope)
+                            beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope,
+                            sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope)
 
 
 
@@ -64,6 +69,10 @@ if __name__ == '__main__':
     populate_db_conditions(beechWS.get_conditions_dict(), "Ski Beech", "cond")
     populate_db_conditions(beechWS.get_lift_dict(), "Ski Beech", "lift")
     populate_db_conditions(beechWS.get_slope_dict(), "Ski Beech", "slope")
+
+    populate_db_conditions(sugarWS.get_conditions_dict(), "Ski Sugar", "cond")
+    populate_db_conditions(sugarWS.get_lift_dict(), "Ski Sugar", "lift")
+    populate_db_conditions(sugarWS.get_slope_dict(), "Ski Sugar", "slope")
 
     
     app.run(debug=True)    

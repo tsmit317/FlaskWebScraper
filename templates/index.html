@@ -120,5 +120,44 @@
         {%endfor%}
     </table>
 
+    <br>
+    <br>
+
+    <table>
+        <tr>
+            <thead>Ski Sugar</thead>
+        </tr>
+        <tr>
+            <th>Conditon</th>
+            <th>Status</th>
+        </tr>
+        {% for cond in sugarCond %}
+        <tr>
+            <td>{{cond.name}}</td>
+            <td>{{cond.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Slope Name</th>
+            <th>Status</th>
+        </tr>
+        {% for slope in sugarSlope %}
+        <tr>
+            <td>{{slope.name}}</td>
+            <td>{{slope.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Lift Name</th>
+            <th>Status</th>
+        </tr>
+        {% for lift in sugarLift%}
+        <tr>
+            <td>{{lift.name}}</td>
+            <td>{{lift.status}}</td>
+        </tr>    
+        {%endfor%}
+    </table>
+
 </div>
 {% endblock %}
