@@ -1,7 +1,85 @@
 {% extends 'base.html' %}
 {% block head %}
-<h1>Ski Resort</h1>
+
 {% endblock %}
 
 {% block body %}
+
+<div>
+    <table class = "beech">
+        <tr>
+            <thead>Ski Beech</thead>
+        </tr>
+        <tr>
+            <th>Condition</th>
+            <th>Status</th>
+        </tr>
+        {% for condition in beechCond%}
+        <tr>
+            <td>{{condition.name}}</td>
+            <td>{{condition.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Slope Name</th>
+            <th>Status</th>
+        </tr>
+        {% for slope in beechSlope%}
+        <tr>
+            <td>{{slope.name}}</td>
+            <td>{{slope.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Lift Name</th>
+            <th>Status</th>
+        </tr>
+        {% for lift in beechLift%}
+        <tr>
+            <td>{{lift.name}}</td>
+            <td>{{lift.status}}</td>
+        </tr>    
+        {%endfor%}
+    </table>
+
+    <br>
+    <br>
+    
+    <table class = "cataloochee">
+        <tr>
+            <thead>Cataloochee Ski Area</thead>
+        </tr>
+        <tr>
+            <th>Conditon</th>
+            <th>Status</th>
+        </tr>
+        {% for cond in cataCond %}
+        <tr>
+            <td>{{cond.name}}</td>
+            <td>{{cond.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Slope Name</th>
+            <th>Status</th>
+        </tr>
+        {% for slope in cataSlope %}
+        <tr>
+            <td>{{slope.name}}</td>
+            <td>{{slope.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Lift Name</th>
+            <th>Status</th>
+        </tr>
+        {% for lift in cataLift%}
+        <tr>
+            <td>{{lift.name}}</td>
+            <td>{{lift.status}}</td>
+        </tr>    
+        {%endfor%}
+    </table>
+
+
 {% endblock %}
