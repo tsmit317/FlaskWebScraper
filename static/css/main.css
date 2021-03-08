@@ -1,14 +1,30 @@
-body, html {
-    font-family: sans-serif;
-}
-
-thead {
-    text-align: center;
-    
-}
 
 table {
     border-collapse: collapse;
-    width: 50%;
+    
 }
-
+caption{
+    /* background-color: yellow; */
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 10px;
+}
+td, th {
+    border: 1px solid rgb(0, 0, 0);
+    padding: 0.5rem;
+    
+}
+td{
+    text-align: left;
+}
+th {
+    background-color: #2652cc;
+    color: white;
+    text-align: center;
+  }
+thead{
+    text-align: center;
+}
+.resort_title{
+    text-align: center;
+}

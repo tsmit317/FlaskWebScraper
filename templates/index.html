@@ -7,194 +7,195 @@
 
 <div>
     <table>
-        <tr>
-            <thead>Ski Beech</thead>
-        </tr>
-        <tr>
-            <th>Condition</th>
-            <th>Status</th>
-        </tr>
-        {% for condition in beechCond%}
-        <tr>
-            <td>{{condition.name}}</td>
-            <td>{{condition.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Slope Name</th>
-            <th>Status</th>
-        </tr>
-        {% for slope in beechSlope%}
-        <tr>
-            <td>{{slope.name}}</td>
-            <td>{{slope.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Lift Name</th>
-            <th>Status</th>
-        </tr>
-        {% for lift in beechLift%}
-        <tr>
-            <td>{{lift.name}}</td>
-            <td>{{lift.status}}</td>
-        </tr>    
-        {%endfor%}
+        <caption>Ski Beech</caption>
+        <tbody>
+            <tr>
+                <th>Condition</th>
+                <th>Status</th>
+            </tr>
+            {% for condition in beechCond%}
+            <tr>
+                <td>{{condition.name}}</td>
+                <td>{{condition.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Slope Name</th>
+                <th>Status</th>
+            </tr>
+            {% for slope in beechSlope%}
+            <tr>
+                <td>{{slope.name}}</td>
+                <td>{{slope.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Lift Name</th>
+                <th>Status</th>
+            </tr>
+            {% for lift in beechLift%}
+            <tr>
+                <td>{{lift.name}}</td>
+                <td>{{lift.status}}</td>
+            </tr>    
+            {%endfor%}
+        </tbody>    
     </table>
-
+</div>
     <br>
     <br>
-
+<div>
     <table>
-        <tr>
-            <thead>Cataloochee Ski Area</thead>
-        </tr>
-        <tr>
-            <th>Conditon</th>
-            <th>Status</th>
-        </tr>
-        {% for cond in cataCond %}
-        <tr>
-            <td>{{cond.name}}</td>
-            <td>{{cond.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Slope Name</th>
-            <th>Status</th>
-        </tr>
-        {% for slope in cataSlope %}
-        <tr>
-            <td>{{slope.name}}</td>
-            <td>{{slope.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Lift Name</th>
-            <th>Status</th>
-        </tr>
-        {% for lift in cataLift%}
-        <tr>
-            <td>{{lift.name}}</td>
-            <td>{{lift.status}}</td>
-        </tr>    
-        {%endfor%}
+        <caption>Cataloochee Ski Area</caption>
+        <tbody>
+            <tr>
+                <th>Conditon</th>
+                <th>Status</th>
+            </tr>
+            {% for cond in cataCond %}
+            <tr>
+                <td>{{cond.name}}</td>
+                <td>{{cond.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Slope Name</th>
+                <th>Status</th>
+            </tr>
+            {% for slope in cataSlope %}
+            <tr>
+                <td>{{slope.name}}</td>
+                <td>{{slope.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Lift Name</th>
+                <th>Status</th>
+            </tr>
+            {% for lift in cataLift%}
+            <tr>
+                <td>{{lift.name}}</td>
+                <td>{{lift.status}}</td>
+            </tr>    
+            {%endfor%}
+        </tbody>
     </table>
-
+</div>
     <br>
     <br>
-
+<div>
     <table>
-        <tr>
-            <thead>Appalachian Ski Resort</thead>
-        </tr>
-        <tr>
-            <th>Conditon</th>
-            <th>Status</th>
-        </tr>
-        {% for cond in appCond %}
-        <tr>
-            <td>{{cond.name}}</td>
-            <td>{{cond.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Slope Name</th>
-            <th>Status</th>
-        </tr>
-        {% for slope in appSlope %}
-        <tr>
-            <td>{{slope.name}}</td>
-            <td>{{slope.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Lift Name</th>
-            <th>Status</th>
-        </tr>
-        {% for lift in appLift%}
-        <tr>
-            <td>{{lift.name}}</td>
-            <td>{{lift.status}}</td>
-        </tr>    
-        {%endfor%}
+        <caption>Appalachian Ski Resort</caption>
+        <tbody>
+            <tr>
+                <th>Conditon</th>
+                <th>Status</th>
+            </tr>
+            {% for cond in appCond %}
+            <tr>
+                <td>{{cond.name}}</td>
+                <td>{{cond.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Slope Name</th>
+                <th>Status</th>
+            </tr>
+            {% for slope in appSlope %}
+            <tr>
+                <td>{{slope.name}}</td>
+                <td>{{slope.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Lift Name</th>
+                <th>Status</th>
+            </tr>
+            {% for lift in appLift%}
+            <tr>
+                <td>{{lift.name}}</td>
+                <td>{{lift.status}}</td>
+            </tr>    
+            {%endfor%}
+        </tbody>    
     </table>
-
+</div>
     <br>
     <br>
-
+<div>
     <table>
-        <tr>
-            <thead>Ski Sugar</thead>
-        </tr>
-        <tr>
-            <th>Conditon</th>
-            <th>Status</th>
-        </tr>
-        {% for cond in sugarCond %}
-        <tr>
-            <td>{{cond.name}}</td>
-            <td>{{cond.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Slope Name</th>
-            <th>Status</th>
-        </tr>
-        {% for slope in sugarSlope %}
-        <tr>
-            <td>{{slope.name}}</td>
-            <td>{{slope.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Lift Name</th>
-            <th>Status</th>
-        </tr>
-        {% for lift in sugarLift%}
-        <tr>
-            <td>{{lift.name}}</td>
-            <td>{{lift.status}}</td>
-        </tr>    
-        {%endfor%}
+        <caption>Ski Sugar</caption>
+        <tbody>
+            <tr>
+                <th>Conditon</th>
+                <th>Status</th>
+            </tr>
+            {% for cond in sugarCond %}
+            <tr>
+                <td>{{cond.name}}</td>
+                <td>{{cond.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Slope Name</th>
+                <th>Status</th>
+            </tr>
+            {% for slope in sugarSlope %}
+            <tr>
+                <td>{{slope.name}}</td>
+                <td>{{slope.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Lift Name</th>
+                <th>Status</th>
+            </tr>
+            {% for lift in sugarLift%}
+            <tr>
+                <td>{{lift.name}}</td>
+                <td>{{lift.status}}</td>
+            </tr>    
+            {%endfor%}
+        </tbody>
     </table>
+</div>
     <br>
     <br>
-
+<div>
     <table>
-        <tr>
-            <thead>Wolf Ridge Ski Resort</thead>
-        </tr>
-        <tr>
-            <th>Conditon</th>
-            <th>Status</th>
-        </tr>
-        {% for cond in wrCond %}
-        <tr>
-            <td>{{cond.name}}</td>
-            <td>{{cond.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Slope Name</th>
-            <th>Status</th>
-        </tr>
-        {% for slope in wrSlope %}
-        <tr>
-            <td>{{slope.name}}</td>
-            <td>{{slope.status}}</td>
-        </tr>    
-        {%endfor%}
-        <tr>
-            <th>Lift Name</th>
-            <th>Status</th>
-        </tr>
-        {% for lift in wrLift%}
-        <tr>
-            <td>{{lift.name}}</td>
-            <td>{{lift.status}}</td>
-        </tr>    
-        {%endfor%}
+        <caption>Wolf Ridge Ski Reasort</caption>>
+        <tbody>
+            <tr>
+                <th>Conditon</th>
+                <th>Status</th>
+            </tr>
+            {% for cond in wrCond %}
+            <tr>
+                <td>{{cond.name}}</td>
+                <td>{{cond.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Slope Name</th>
+                <th>Status</th>
+            </tr>
+            {% for slope in wrSlope %}
+            <tr>
+                <td>{{slope.name}}</td>
+                <td>{{slope.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Lift Name</th>
+                <th>Status</th>
+            </tr>
+            {% for lift in wrLift%}
+            <tr>
+                <td>{{lift.name}}</td>
+                <td>{{lift.status}}</td>
+            </tr>    
+            {%endfor%}
+        </tbody>    
     </table>
 </div>
 {% endblock %}
