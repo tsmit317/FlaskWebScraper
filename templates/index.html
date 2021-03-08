@@ -158,6 +158,43 @@
         </tr>    
         {%endfor%}
     </table>
+    <br>
+    <br>
 
+    <table>
+        <tr>
+            <thead>Wolf Ridge Ski Resort</thead>
+        </tr>
+        <tr>
+            <th>Conditon</th>
+            <th>Status</th>
+        </tr>
+        {% for cond in wrCond %}
+        <tr>
+            <td>{{cond.name}}</td>
+            <td>{{cond.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Slope Name</th>
+            <th>Status</th>
+        </tr>
+        {% for slope in wrSlope %}
+        <tr>
+            <td>{{slope.name}}</td>
+            <td>{{slope.status}}</td>
+        </tr>    
+        {%endfor%}
+        <tr>
+            <th>Lift Name</th>
+            <th>Status</th>
+        </tr>
+        {% for lift in wrLift%}
+        <tr>
+            <td>{{lift.name}}</td>
+            <td>{{lift.status}}</td>
+        </tr>    
+        {%endfor%}
+    </table>
 </div>
 {% endblock %}

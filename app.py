@@ -42,16 +42,19 @@ def index():
     beechLift = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="lift").all()
 
     sugarCond = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="cond").all()
-    suagrSlope = ResortDB.query.filter(ResortDB.resort == "Ski Suagr").filter(ResortDB.slc=="slope").all()
+    suagrSlope = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="slope").all()
     sugarLift = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="lift").all()
     
-   
+    wrCond = ResortDB.query.filter(ResortDB.resort == "Wolf").filter(ResortDB.slc=="cond").all()
+    wrSlope = ResortDB.query.filter(ResortDB.resort == "Wolf").filter(ResortDB.slc=="slope").all()
+    wrLift = ResortDB.query.filter(ResortDB.resort == "Wolf").filter(ResortDB.slc=="lift").all()
     
     return render_template('index.html', 
                             appCond = appCond, appLift = appLift, appSlope = appSlope,
                             cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope,
                             beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope,
-                            sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope)
+                            sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope, 
+                            wrCond = wrCond, wrLift = wrLift, wrSlope = wrSlope)
 
 
 
@@ -74,5 +77,8 @@ if __name__ == '__main__':
     populate_db_conditions(sugarWS.get_lift_dict(), "Ski Sugar", "lift")
     populate_db_conditions(sugarWS.get_slope_dict(), "Ski Sugar", "slope")
 
-    
+    populate_db_conditions(wolfridgeWS.get_conditions_dict(), "Wolf", "cond")
+    populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
+    populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
+
     app.run(debug=True)    
