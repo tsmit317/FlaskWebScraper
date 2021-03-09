@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
@@ -14,11 +14,14 @@ class ResortDB(db.Model):
     slc = db.Column(db.String(10))
     name = db.Column(db.String(100))
     status = db.Column(db.String(200))
-
+    updated_on = db.Column(db.String(50))
+        
  
 def populate_db_conditions(dictToUse, rname, slc):
  for k, v in dictToUse.items():
-        newCond = ResortDB(resort = rname, slc = slc, name = k, status = v)
+        now = datetime.now()
+        update_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+        newCond = ResortDB(resort = rname, slc = slc, name = k, status = v, updated_on = update_time)
         try:
             db.session.add(newCond)
             db.session.commit()
@@ -52,6 +55,7 @@ def update_db():
 
 @app.route('/')
 def index():
+    
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
     appSlope = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="slope").all()
     appLift = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="lift").all()
@@ -61,7 +65,7 @@ def index():
     beechCond = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="cond").all()
     beechSlope = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="slope").all()
     beechLift = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="lift").all()
-
+    
     sugarCond = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="cond").all()
     suagrSlope = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="slope").all()
     sugarLift = ResortDB.query.filter(ResortDB.resort == "Ski Sugar").filter(ResortDB.slc=="lift").all()
@@ -81,7 +85,7 @@ def index():
 
 if __name__ == '__main__':
     db.create_all()
-    # delete_everthing(ResortDB)
-    
+    delete_everthing(ResortDB)
+    update_db()
 
     app.run(debug=True)    
