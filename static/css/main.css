@@ -1,6 +1,6 @@
 
 table {
-    border-collapse: collapse;
+    border-collapse: collapse; 
     
 }
 caption{
@@ -12,9 +12,9 @@ caption{
 td, th {
     border: 1px solid rgb(0, 0, 0);
     padding: 0.5rem;
-    
+    font-size: small;
 }
-td{
+td {
     text-align: left;
 }
 th {
@@ -22,8 +22,15 @@ th {
     color: white;
     text-align: center;
   }
-thead{
+thead {
     text-align: center;
+}
+img {
+    
+    height: 3em;
+}
+.other_column {
+    
 }
 .resort_title{
     text-align: center;
