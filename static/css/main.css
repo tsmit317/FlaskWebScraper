@@ -1,7 +1,12 @@
 
 table {
     border-collapse: collapse; 
-    
+    table-layout:fixed; 
+    width:290px;
+    float: left;
+}
+div{
+    margin-top:3px
 }
 caption{
     /* background-color: yellow; */
@@ -13,9 +18,11 @@ td, th {
     border: 1px solid rgb(0, 0, 0);
     padding: 0.5rem;
     font-size: small;
+    background-color: rgb(185, 185, 184);
 }
 td {
     text-align: left;
+    word-break:keep-all;
 }
 th {
     background-color: #2652cc;
