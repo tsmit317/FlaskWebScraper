@@ -1,24 +1,34 @@
 
+body {
+    background-color: rgb(255, 255, 255);
+}
+
 table {
     border-collapse: collapse; 
     table-layout:fixed; 
     width:290px;
     float: left;
+    
 }
+
 div{
     margin-top:3px
+    
+   
 }
+
 caption{
     /* background-color: yellow; */
     color: rgb(0, 0, 0);
     font-weight: bold;
     padding: 10px;
 }
+
 td, th {
     border: 1px solid rgb(0, 0, 0);
     padding: 0.5rem;
     font-size: small;
-    background-color: rgb(185, 185, 184);
+    background-color: rgb(255, 255, 254);
 }
 td {
     text-align: left;
@@ -36,9 +46,5 @@ img {
     
     height: 3em;
 }
-.other_column {
-    
-}
-.resort_title{
-    text-align: center;
-}
+
+

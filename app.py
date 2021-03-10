@@ -2,11 +2,15 @@ from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 from datetime import datetime
+from flask_apscheduler import APScheduler
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+scheduler = APScheduler()
 
 class ResortDB(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -53,6 +57,12 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
+def scheduledTask():
+     delete_everthing(ResortDB)
+     update_db()
+     print('Inside Scheduled Task')
+     
+
 @app.route('/')
 def index():
     
@@ -85,7 +95,7 @@ def index():
 
 if __name__ == '__main__':
     db.create_all()
-    # delete_everthing(ResortDB)
-    # update_db()
-
+    
+    # scheduler.add_job(id = 'Scheduled task', func=scheduledTask, trigger='interval', minutes=60)
+    # scheduler.start()
     app.run(debug=True)    
