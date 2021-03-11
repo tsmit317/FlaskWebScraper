@@ -61,9 +61,34 @@ img {
 }
 
 .lastupdate {
-    
     text-align: center;
     font-size: 10px;
     font-weight: lighter;
 }
+table.beech th {
+    background-color: #00adef;
+    color: white;
+    text-align: center;
+}
+table.cataloochee th {
+    background-color: #0076bf;
+    color: white;
+    text-align: center;
 
+}
+table.app th {
+    background-color: #bb472a;
+    color: white;
+    text-align: center;
+}
+table.sugar th {
+    background-color: #30b457;
+    color: black;
+    text-align: center;
+}
+
+table.wolfridge th {
+    background-color: #6e2306;
+    color: #c2cdd3;
+    text-align: center;
+}
