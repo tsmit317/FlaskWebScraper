@@ -9,6 +9,51 @@
     <p>Last Updated: {{beechCond[0].updated_on}}</p>
 </div>
 <div>
+    <table class="app">
+        <caption class='table_head_image'><a href="https://appskimtn.com/" target="_blank"><img src="static\images\appIMG.jpg"></a></caption>
+        <caption>Appalachian Ski Mountain</caption>
+        <tbody>
+            <tr>
+                <th>Conditon</th>
+                <th>Status</th>
+            </tr>
+            {% for cond in appCond %}
+            <tr>
+                <td>{{cond.name}}</td>
+                <td>{{cond.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Slope Name</th>
+                <th>Status</th>
+            </tr>
+            {% for slope in appSlope %}
+            <tr>
+                <td>{{slope.name}}</td>
+                <td>{{slope.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th>Lift Name</th>
+                <th>Status</th>
+            </tr>
+            {% for lift in appLift%}
+            <tr>
+                <td>{{lift.name}}</td>
+                <td>{{lift.status}}</td>
+            </tr>    
+            {%endfor%}
+            <tr>
+                <th colspan="2">Other</th>
+            </tr>  
+            <tr>
+                <td>Web Camera</td>
+                <td><a href="https://appskimtn.com/live-cams" target="_blank">Link</a></td>
+            </tr>
+        </tbody>    
+    </table>
+</div>
+<div>
     <table class='beech'>
         <caption class='table_head_image'><a href="https://www.beechmountainresort.com/" target="_blank"><img src="static\images\beechIMG2.png"></a></caption>
         <caption>Ski Beech</caption>
@@ -105,51 +150,7 @@
 </div>
     
     
-<div>
-    <table class="app">
-        <caption class='table_head_image'><a href="https://appskimtn.com/" target="_blank"><img src="static\images\appIMG.jpg"></a></caption>
-        <caption>Appalachian Ski Mountain</caption>
-        <tbody>
-            <tr>
-                <th>Conditon</th>
-                <th>Status</th>
-            </tr>
-            {% for cond in appCond %}
-            <tr>
-                <td>{{cond.name}}</td>
-                <td>{{cond.status}}</td>
-            </tr>    
-            {%endfor%}
-            <tr>
-                <th>Slope Name</th>
-                <th>Status</th>
-            </tr>
-            {% for slope in appSlope %}
-            <tr>
-                <td>{{slope.name}}</td>
-                <td>{{slope.status}}</td>
-            </tr>    
-            {%endfor%}
-            <tr>
-                <th>Lift Name</th>
-                <th>Status</th>
-            </tr>
-            {% for lift in appLift%}
-            <tr>
-                <td>{{lift.name}}</td>
-                <td>{{lift.status}}</td>
-            </tr>    
-            {%endfor%}
-            <tr>
-                <th colspan="2">Other</th>
-            </tr>  
-            <tr>
-                <td>Web Camera</td>
-                <td><a href="https://appskimtn.com/live-cams" target="_blank">Link</a></td>
-            </tr>
-        </tbody>    
-    </table>
-</div>
+
     
 <div>
     <table class='sugar'>
