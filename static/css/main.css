@@ -8,7 +8,8 @@ body {
     background-size: cover;
 }
 h1, p {
-    /* margin-top: 5%; */
+    padding: 0%;
+    margin: 0%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +30,7 @@ table {
 }
 
 div{
-    
+    margin-top: 4%;
    
 }
 
