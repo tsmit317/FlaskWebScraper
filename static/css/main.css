@@ -1,29 +1,38 @@
 
 body {
+    margin: 0px;
     background-color: rgb(146, 148, 148);
 }
+h1, p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+p {
 
+}
 table {
     border-collapse: collapse; 
     table-layout:fixed; 
     width:290px;
     background-color: white;
     margin: 2px;
-    
+    border: 1px solid rgb(0, 0, 0);
+    float: left;
 }
 
 div{
-    margin-top: 5px;
-    float: left;
+    
    
 }
 
 caption{
-    /* background-color: yellow; */
     color: rgb(0, 0, 0);
     font-weight: bold;
     padding: 10px;
     background-color: white;
+    font-size: large;
 }
 
 td, th {
@@ -45,8 +54,16 @@ thead {
     text-align: center;
 }
 img {
-    
-    height: 3em;
+    height: 5em;
+}
+.table_head_image {
+    border-radius: 3px 3px 0px 0px;
 }
 
+.lastupdate {
+    
+    text-align: center;
+    font-size: 10px;
+    font-weight: lighter;
+}
 

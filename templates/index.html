@@ -4,20 +4,17 @@
 {% endblock %}
 
 {% block body %}
-
+<div>
+    <h1>North Carolina Ski Resorts</h1>
+    <p>Last Updated: {{beechCond[0].updated_on}}</p>
+</div>
 <div>
     <table>
-        <caption>
-            <a href="https://www.beechmountainresort.com/" target="_blank"><img src="static\images\beechIMG.jpg"></a>
-        </caption>
-        
+        <caption class='table_head_image'><a href="https://www.beechmountainresort.com/" target="_blank"><img src="static\images\beechIMG.jpg"></a></caption>
         <caption>Ski Beech</caption>
         
         <tbody>
-            <tr>
-                <td>Last Updated</td>
-                <td>{{beechCond[0].updated_on}}</td>
-            </tr>
+           
             <tr>
                 <th>Condition</th>
                 <th>Status</th>
@@ -59,11 +56,10 @@
         </tbody>    
     </table>
 </div>
-    <br>
-    <br>
+   
 <div>
     <table>
-        <caption><a href="https://cataloochee.com/" target="_blank"><img src="static\images\cataloocheeIMG.jpg"></a></caption>
+        <caption class='table_head_image'><a href="https://cataloochee.com/" target="_blank"><img src="static\images\cataloocheeIMG.jpg"></a></caption>
         <caption>Cataloochee Ski Area</caption>
         <tbody>
             <tr>
@@ -107,11 +103,11 @@
         </tbody>
     </table>
 </div>
-    <br>
-    <br>
+    
+    
 <div>
     <table>
-        <caption><a href="https://appskimtn.com/" target="_blank"><img src="static\images\appIMG.jpg"></a></caption>
+        <caption class='table_head_image'><a href="https://appskimtn.com/" target="_blank"><img src="static\images\appIMG.jpg"></a></caption>
         <caption>Appalachian Ski Mountain</caption>
         <tbody>
             <tr>
@@ -154,11 +150,10 @@
         </tbody>    
     </table>
 </div>
-    <br>
-    <br>
+    
 <div>
     <table>
-        <caption><a href="http://www.skisugar.com/" target="_blank"><img src="static\images\sugarIMG.jpg"></a></caption>
+        <caption class='table_head_image'><a href="http://www.skisugar.com/" target="_blank"><img src="static\images\sugarIMG.jpg"></a></caption>
         <caption>Ski Sugar</caption>
         <tbody>
             <tr>
@@ -202,11 +197,10 @@
         </tbody>
     </table>
 </div>
-    <br>
-    <br>
+   
 <div>
     <table>
-        <caption><a href="https://skiwolfridgenc.com/" target="_blank"><img src="static\images\wolfridgeIMG.png"></a></caption>
+        <caption class='table_head_image'><a href="https://skiwolfridgenc.com/" target="_blank"><img src="static\images\wolfridgeIMG.png"></a></caption>
         <caption> Wolf Ridge Ski Reasort</caption>
         <tbody>
             <tr>
