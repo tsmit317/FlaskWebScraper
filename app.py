@@ -95,7 +95,8 @@ def index():
 
 if __name__ == '__main__':
     db.create_all()
-    
-    scheduler.add_job(id = 'Scheduled task', func=scheduledTask, trigger='interval', minutes=60)
-    scheduler.start()
+    # delete_everthing(ResortDB)
+    # update_db()
+    # scheduler.add_job(id = 'Scheduled task', func=scheduledTask, trigger='interval', minutes=60)
+    # scheduler.start()
     app.run(debug=True)    

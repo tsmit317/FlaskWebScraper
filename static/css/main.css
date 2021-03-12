@@ -115,3 +115,7 @@ table.wolfridge th {
 table.wolfridge th, td{
     font-family: Arial, Helvetica, sans-serif;
 }
+.table_head_image {
+    position: sticky;
+    top: 0;
+}
