@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 {% block head %}
+<title>NC Ski Resort Conditons About</title>
 {% endblock %}
 {% block body %}
 <div class="topnav"> 
     <a href="{{ url_for('home') }}" >Home</a>
     <a href="{{ url_for('about') }}" >About</a>
 </div>
-<h1>About me</h1>
-<p>This is a portfolio site about anything that can be put in a portfolio.</p>
-
+<div class="abouttext">
+    <section>
+        <article>
+            <h1>About</h1>
+            <p>This website utilizes web scraping through Python’s Beautiful Soup library to collect the current conditions from every North Carolina ski resort. 
+            Built with the Flask web framework, the website then displays the collected information, updating every 30 minutes.  
+            </p>
+        </article>
+    </section>
+    
+</div>
 {% endblock %}

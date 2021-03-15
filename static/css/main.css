@@ -7,6 +7,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
+
 h1, p {
     padding: 0%;
     margin: 0%;
@@ -15,9 +16,7 @@ h1, p {
     justify-content: center;
     text-align: center;
 }
-p {
 
-}
 table {
     border-collapse: collapse; 
     table-layout:fixed; 
@@ -31,7 +30,6 @@ table {
 
 div{
     margin-top: 4%;
-   
 }
 
 caption{
@@ -49,64 +47,68 @@ td, th {
     font-size: small;
     background-color: rgb(255, 255, 254);
 }
+
 td {
     text-align: left;
     word-break:keep-all;
 }
+
 th {
     background-color: #2652cc;
     color: white;
     text-align: center;
-  }
-thead {
-    text-align: center;
 }
+
 img {
     height: 5em;
 }
+
 .table_head_image {
     border-radius: 3px 3px 0px 0px;
 }
 
-.lastupdate {
-    text-align: center;
-    font-size: 10px;
-    font-weight: lighter;
-}
 table.beech th {
     background-color: #00adef;
     color: white;
     text-align: center;
 }
+
 table.beech th, td {
     font-family: 'Poppins',sans-serif;
 }
+
 table.cataloochee th {
     background-color: #0076bf;
     color: white;
     text-align: center;
 
 }
+
 table.cataloochee th, td {
     font-family:'Poppins',sans-serif;
 }
+
 table.app {
     margin-left: 10px;
 }
+
 table.app th {
     
     background-color: #bb472a;
     color: white;
     text-align: center;
 }
+
 table.app th, td { 
     font-family: "Inter",sans-serif;
 }
+
 table.sugar th {
     background-color: #30b457;
     color: black;
     text-align: center;
 }
+
 table.sugar th, td {
     font-family: Arial,sans-serif;;
 }
@@ -120,6 +122,7 @@ table.wolfridge th {
 table.wolfridge th, td{
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .table_head_image {
     position: sticky;
     top: 0;
@@ -129,30 +132,48 @@ table.wolfridge th, td{
     background-color: #333;
     overflow: hidden;
     margin-top: 0px;
-  }
+}
   
-  /* Style the links inside the navigation bar */
-  .topnav a {
+.topnav a {
     float: left;
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-  }
-/* Change the color of links on hover */
+}
+
 .topnav a:hover {
     background-color: #ddd;
     color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
-  }
+}
 
-  .titleupdate{
+.titleupdate{
       margin-top: 2%;
       margin-bottom: 6%;
-  }
+      font-family: Georgia, serif;
+      font-variant: small-caps;
+}
+
+.abouttext {
+    color: rgb(0, 0, 0);
+    padding: 5px;
+    background-color: white;
+    text-align: left;
+    position:absolute;
+} 
+
+.abouttext section {
+  
+}
+
+.abouttext article {
+    
+}
+.abouttext h1 {
+ 
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: large;
+    font-variant: small-caps;
+}   
