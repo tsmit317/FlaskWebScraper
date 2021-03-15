@@ -64,7 +64,7 @@ def scheduledTask():
      
 
 @app.route('/')
-def index():
+def home():
     
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
     appSlope = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="slope").all()
@@ -84,14 +84,16 @@ def index():
     wrSlope = ResortDB.query.filter(ResortDB.resort == "Wolf").filter(ResortDB.slc=="slope").all()
     wrLift = ResortDB.query.filter(ResortDB.resort == "Wolf").filter(ResortDB.slc=="lift").all()
     
-    return render_template('index.html', 
+    return render_template('home.html', 
                             appCond = appCond, appLift = appLift, appSlope = appSlope,
                             cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope,
                             beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope,
                             sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope, 
                             wrCond = wrCond, wrLift = wrLift, wrSlope = wrSlope)
 
-
+@app.route('/about/')
+def about():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     db.create_all()
