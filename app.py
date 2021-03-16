@@ -1,9 +1,12 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
-from lib.WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
+
 from datetime import datetime
 from flask_apscheduler import APScheduler
+import sys
 
+sys.path.insert(1, 'lib\WebScraper')
+import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
