@@ -1,6 +1,3 @@
-[submodule "WebScraper"]
-	path = WebScraper
-	url = https://github.com/tsmit317/WebScraper.git
 [submodule "lib/WebScraper"]
 	path = lib/WebScraper
 	url = https://github.com/tsmit317/WebScraper
