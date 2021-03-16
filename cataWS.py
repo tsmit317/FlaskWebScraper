@@ -3,12 +3,15 @@ from bs4 import BeautifulSoup
 
 
 #Cataloochee Ski Resort
-cataWPResponse = requests.get('https://cataloochee.com/the-mountain/snow-report/')
-cataWP = cataWPResponse.content
-cataSoup = BeautifulSoup(cataWP, 'html.parser')
+def getSoup():
+    cataWPResponse = requests.get('https://cataloochee.com/the-mountain/snow-report/')
+    cataWP = cataWPResponse.content
+    cSoup = BeautifulSoup(cataWP, 'html.parser')
+    return cSoup
 
 
 def get_conditions_dict():
+    cataSoup = getSoup()
     # Get tags containing conditions
     cata_conditons = cataSoup.find_all('div', class_ = 'snow-report-overview')[1]
     cata_conditions_list = []
@@ -23,11 +26,13 @@ def get_conditions_dict():
     return {cata_conditions_list[i+1]: cata_conditions_list[i] for i in range(0, len(cata_conditions_list), 2)} 
 
 def get_slope_dict():
+    cataSoup = getSoup()
     cata_trail_columns =[i.get_text(strip = True) for i in cataSoup.find('table', class_='trails-table').find_all('td')]
     return {cata_trail_columns[i]: cata_trail_columns[i + 1] for i in range(0, len(cata_trail_columns), 2)}
    
 
 def get_lift_dict():
+    cataSoup = getSoup()
     cata_lifts_columns = [i.get_text(strip = True) for i in cataSoup.find('table', class_='lifts-table').find_all('td')]
     return {cata_lifts_columns[i]: cata_lifts_columns[i + 1] for i in range(0, len(cata_lifts_columns), 2)}
  
