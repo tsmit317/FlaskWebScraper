@@ -1,6 +1,6 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
-from WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
+from lib.WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 from datetime import datetime
 from flask_apscheduler import APScheduler
 
