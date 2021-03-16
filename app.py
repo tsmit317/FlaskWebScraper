@@ -99,6 +99,6 @@ if __name__ == '__main__':
     db.create_all()
     # delete_everthing(ResortDB)
     # update_db()
-    # scheduler.add_job(id = 'Scheduled task', func=scheduledTask, trigger='interval', minutes=60)
-    # scheduler.start()
+    scheduler.add_job(id = 'Scheduled task', func=scheduledTask, trigger='interval', minutes=30)
+    scheduler.start()
     app.run(debug=True)    
