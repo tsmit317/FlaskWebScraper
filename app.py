@@ -3,9 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
 from flask_apscheduler import APScheduler
-import sys
 
-sys.path.insert(1, 'lib\WebScraper')
 from WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 
 app = Flask(__name__)
