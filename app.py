@@ -3,8 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
 from flask_apscheduler import APScheduler
-
-from lib.WebScrape import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
+import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
