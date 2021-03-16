@@ -5,6 +5,7 @@ from datetime import datetime
 from flask_apscheduler import APScheduler
 import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
