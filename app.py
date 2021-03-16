@@ -6,7 +6,7 @@ from flask_apscheduler import APScheduler
 import sys
 
 sys.path.insert(1, 'lib\WebScraper')
-import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
+from WebScraper import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
