@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
-from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 import sys
 
@@ -58,7 +58,7 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
-scheduler = BlockingScheduler(daemon=True)
+scheduler = BackgroundScheduler(daemon=True)
 def sched_job():
      delete_everthing(ResortDB)
      update_db()
