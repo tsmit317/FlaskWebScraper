@@ -20,6 +20,7 @@ class ResortDB(db.Model):
     name = db.Column(db.String(100))
     status = db.Column(db.String(200))
     updated_on = db.Column(db.String(50))
+      
         
  
 def populate_db_conditions(dictToUse, rname, slc):
