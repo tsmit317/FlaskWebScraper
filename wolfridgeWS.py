@@ -9,9 +9,9 @@ def getSoup():
     wSoup = BeautifulSoup(wolfWP, 'html.parser')
     return wSoup
 
-
+wolfSoup = getSoup()
 def get_lift_dict():
-    wolfSoup = getSoup()
+    # wolfSoup = getSoup()
     wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
     return {row.find('td', class_='column-2').text: 
             row.find('td', class_='column-3').text 
@@ -19,7 +19,7 @@ def get_lift_dict():
 
 
 def get_slope_dict():
-    wolfSoup = getSoup()
+    # wolfSoup = getSoup()
     wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr') 
     return {row.find('td', class_ = 'column-3').get_text(): 
             row.find('td', class_ = 'column-4').get_text() 
@@ -27,7 +27,7 @@ def get_slope_dict():
 
 
 def get_conditions_dict():
-    wolfSoup = getSoup()
+    # wolfSoup = getSoup()
     wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
     wr_conditions_dict = {row.find('td', class_ = 'column-1').get_text():
                           row.find('td', class_ = 'column-2').get_text() 
