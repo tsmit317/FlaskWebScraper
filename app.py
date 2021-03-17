@@ -64,9 +64,9 @@ def sched_job():
      update_db()
      print('Inside Scheduled Task')
      sys.stdout.flush()
-     
+
 scheduler.add_job(sched_job, 'interval', minutes = 1)
-scheduler.start()    
+# scheduler.start()    
 
 
 @app.route('/')
