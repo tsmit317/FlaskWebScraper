@@ -1,8 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
+import sys
 
 #App Ski Mtn
 def getSoup():
+    print("inside app getSoup")
+    sys.stdout.flush()
     appWPResponse = requests.get('https://www.appskimtn.com/slope-report')
     appWP = appWPResponse.content
     asoup = BeautifulSoup(appWP, 'html.parser')
