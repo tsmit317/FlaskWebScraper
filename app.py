@@ -65,7 +65,7 @@ def sched_job():
      print('Inside Scheduled Task')
      sys.stdout.flush()
 scheduler.add_job(sched_job,'interval', minutes=3)
-scheduler.start()
+# scheduler.start()
 
 
 
@@ -107,5 +107,5 @@ if __name__ == '__main__':
     db.create_all()
     # delete_everthing(ResortDB)
     # update_db()
-    # scheduler.start()    
+    scheduler.start()    
     app.run(debug=True)    
