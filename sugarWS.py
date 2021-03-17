@@ -8,10 +8,11 @@ def create_beautifulSoup_main():
     sugarWPResponse = requests.get('http://www.skisugar.com/')
     sugarWP = sugarWPResponse.content
     return BeautifulSoup(sugarWP, 'html.parser')
+    
 sugarSoup = create_beautifulSoup_main()
+
 #TODO: This looks ugly
 def get_conditions_dict(): 
-    
     # Is there a way to add this to a dictionary without involving a list? 
     if sugarSoup.find('table', class_ = "smrcctable").find('td').get_text() == 'SNOWMAKING IN PROGRESS':
         sugar_conditions_list = []
@@ -37,6 +38,7 @@ def create_beautifulSoup_sugartrailmap():
     sugarWP = sugarWPResponse.content
     sugarSoup = BeautifulSoup(sugarWP, 'html.parser')
     return sugarSoup.find_all('p', attrs= {'style':"line-height: 18px;"})
+    
 sugarTags = create_beautifulSoup_sugartrailmap()
 
 def get_lift_dict():

@@ -1,9 +1,7 @@
 from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
-
 from datetime import datetime
 from flask_apscheduler import APScheduler
-# from apscheduler.schedulers.background import BackgroundScheduler
 import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 import sys
 import time
@@ -65,7 +63,8 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
-@scheduler.task('interval', id='sched_job', minutes=2, misfire_grace_time=900)
+
+@scheduler.task('interval', id='sched_job', hours=1, misfire_grace_time=900)
 def sched_job():
      print("Inside Scheduled Task")
      sys.stdout.flush()
@@ -74,16 +73,10 @@ def sched_job():
      time.sleep(20)
 
 scheduler.start()     
-# scheduler.add_job(sched_job,'cron', id='sched_job', minutes=1)
-# scheduler.start()
-
-
-
 
 
 @app.route('/')
 def home():
-    
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
     appSlope = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="slope").all()
     appLift = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="lift").all()
@@ -115,11 +108,5 @@ def about():
 
 if __name__ == '__main__':
     db.create_all()
-    # delete_everthing(ResortDB)
-    # update_db()
-    # scheduler = BackgroundScheduler()
-    # scheduler.configure(timezone = 'EST')
-    # scheduler.add_job(sched_job,'interval', id='sched_job', minutes=1)
-    # scheduler.start()
       
     app.run(debug=True)    
