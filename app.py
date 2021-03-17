@@ -66,7 +66,7 @@ def sched_job():
      sys.stdout.flush()
 
 
-scheduler.start()    
+
 
 
 @app.route('/')
@@ -105,5 +105,5 @@ if __name__ == '__main__':
     db.create_all()
     # delete_everthing(ResortDB)
     # update_db()
-       
+    scheduler.start()    
     app.run(debug=True)    
