@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-scheduler = BlockingScheduler()
+
 
 class ResortDB(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -58,12 +58,14 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
-@scheduler.scheduled_job('interval', minutes=3)
+scheduler = BlockingScheduler(daemon=True)
 def sched_job():
      delete_everthing(ResortDB)
      update_db()
      print('Inside Scheduled Task')
      sys.stdout.flush()
+scheduler.add_job(sched_job,'interval', minutes=3)
+scheduler.start()
 
 
 
@@ -105,5 +107,5 @@ if __name__ == '__main__':
     db.create_all()
     # delete_everthing(ResortDB)
     # update_db()
-    scheduler.start()    
+    # scheduler.start()    
     app.run(debug=True)    
