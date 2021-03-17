@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 import sys
 
@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-scheduler = BackgroundScheduler()
+scheduler = BlockingScheduler()
 
 class ResortDB(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -58,15 +58,15 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
-
+@scheduler.scheduled_job('interval', minutes=3)
 def sched_job():
      delete_everthing(ResortDB)
      update_db()
      print('Inside Scheduled Task')
      sys.stdout.flush()
 
-scheduler.add_job(sched_job, 'interval', minutes = 1)
-# scheduler.start()    
+
+scheduler.start()    
 
 
 @app.route('/')
