@@ -77,7 +77,7 @@ def update_db():
     print("inside update db: wolf done")
     sys.stdout.flush()
 
-@scheduler.task('interval', id='sched_job', hours=1, misfire_grace_time=900)
+@scheduler.task('interval', id='sched_job', minutes = 5, misfire_grace_time=900)
 def sched_job():
     print("Inside Scheduled Task")
     sys.stdout.flush()
@@ -127,4 +127,4 @@ if __name__ == '__main__':
     db.create_all()
     # delete_everthing(ResortDB)
     # update_db()
-    app.run(debug=False)    
+    app.run(debug=False, use_reloader=False)    
