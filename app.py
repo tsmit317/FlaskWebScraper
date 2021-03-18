@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_apscheduler import APScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 import sys
 import time
@@ -11,7 +12,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-scheduler = APScheduler()
+scheduler = BackgroundScheduler()
 
 
 class ResortDB(db.Model):
@@ -52,7 +53,7 @@ def update_db():
     populate_db_conditions(appWS.get_lift_dict(), "App", "lift")
     print('inside update db: app done')
     sys.stdout.flush()
-
+    
     populate_db_conditions(cataWS.get_slope_dict(), "Cata", "slope")
     populate_db_conditions(cataWS.get_conditions_dict(), "Cata", "cond")
     populate_db_conditions(cataWS.get_lift_dict(), "Cata", "lift")
@@ -77,7 +78,7 @@ def update_db():
     print("inside update db: wolf done")
     sys.stdout.flush()
 
-@scheduler.task('interval', id='sched_job', hours=1, misfire_grace_time=900)
+@scheduler.scheduled_job('interval', id='sched_job', minutes=4,max_instances=1, misfire_grace_time=900)
 def sched_job():
     print("Inside Scheduled Task")
     sys.stdout.flush()
