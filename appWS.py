@@ -4,8 +4,6 @@ import sys
 
 #App Ski Mtn
 def getSoup():
-    print("inside app getSoup")
-    sys.stdout.flush()
     appWPResponse = requests.get('https://www.appskimtn.com/slope-report')
     appWP = appWPResponse.content
     asoup = BeautifulSoup(appWP, 'html.parser')
@@ -13,10 +11,7 @@ def getSoup():
 
 appSoup = getSoup()
 
-# TODO: Fix this monstrosity
 def get_conditions_dict():
-    print("inside app getConditons")
-    sys.stdout.flush()
     conditons_dict = {}            
     for index, i in enumerate(appSoup.find_all('ul', class_ = 'slope-report__details')):
         for j in i.find_all('li'):
@@ -34,24 +29,18 @@ def get_conditions_dict():
                     conditons_dict['Road Details'] = j.find('span', class_ = 'slope-report__details-plain-text').get_text()
        
     if conditons_dict['New Snow']  == '':
-        conditons_dict['New Snow'] = 'N/A' 
-    print("end of app getConditions")
-    sys.stdout.flush()      
+        conditons_dict['New Snow'] = 'N/A'     
     return conditons_dict
 
 
 def get_slope_dict():
-    print("inside app getslope")
-    sys.stdout.flush() 
     appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
     return {i.find('span', class_ = 'slope-report__status-title').get_text():
             i.find('span', class_ = 'slope-report__status-status').get_text()
             for i in appSlopeUL[0].find_all('li')}
   
 
-def get_lift_dict(): 
-    print("inside app getlift")
-    sys.stdout.flush() 
+def get_lift_dict():  
     appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
     return {i.find('span', class_ = 'slope-report__status-title').get_text():
             i.find('span', class_ = 'slope-report__status-status').get_text()

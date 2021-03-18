@@ -1,20 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
-import sys
 
 #WolfRidge Ski Resort
 def getSoup():
-    print("inside wolf getsoup ")
-    sys.stdout.flush() 
     wolfWPResponse = requests.get('https://skiwolfridgenc.com/the-mountain/snow-report')
     wolfWP = wolfWPResponse.content
     wSoup = BeautifulSoup(wolfWP, 'html.parser')
     return wSoup
 
 wolfSoup = getSoup()
+
 def get_lift_dict():
-    print("inside wolf getdict ")
-    sys.stdout.flush()
     wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
     return {row.find('td', class_='column-2').text: 
             row.find('td', class_='column-3').text 
@@ -22,8 +18,6 @@ def get_lift_dict():
 
 
 def get_slope_dict():
-    print("inside wolf getslope ")
-    sys.stdout.flush()
     wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr') 
     return {row.find('td', class_ = 'column-3').get_text(): 
             row.find('td', class_ = 'column-4').get_text() 
@@ -31,8 +25,6 @@ def get_slope_dict():
 
 
 def get_conditions_dict():
-    print("inside wolf getconditions ")
-    sys.stdout.flush()
     wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
     wr_conditions_dict = {row.find('td', class_ = 'column-1').get_text():
                           row.find('td', class_ = 'column-2').get_text() 
