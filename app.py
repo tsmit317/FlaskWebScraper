@@ -77,7 +77,7 @@ def update_db():
     print("inside update db: wolf done")
     sys.stdout.flush()
 
-@scheduler.task('interval', id='sched_job', minutes=5, misfire_grace_time=900)
+@scheduler.task('interval', id='sched_job', hours=1, misfire_grace_time=900)
 def sched_job():
     print("Inside Scheduled Task")
     sys.stdout.flush()
