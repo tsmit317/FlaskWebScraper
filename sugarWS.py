@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import sys
 
 # Sugar Mountain Ski Resort
 # Gets Conditions from the main page
@@ -52,7 +51,7 @@ def get_slope_dict():
     # Get Black Diamond Runs. These all used .get_text(), so I grouped them together. 
     # Odd indexes were skipped, as they were just labels
     sugar_BlackDiamond_TagList = [sugarTags[2], sugarTags[4], sugarTags[6]]
-
+    sugar_slope_dict = {}
     # Having trouble getting the tag text. Was combining two runs.
     for i in sugar_BlackDiamond_TagList:
         for j in i.find_all('img'):
