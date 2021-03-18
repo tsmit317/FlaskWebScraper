@@ -1,10 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
-
+import sys
 
 # Sugar Mountain Ski Resort
 # Gets Conditions from the main page
 def create_beautifulSoup_main():
+    print("inside sugar getsoup ")
+    sys.stdout.flush() 
     sugarWPResponse = requests.get('http://www.skisugar.com/')
     sugarWP = sugarWPResponse.content
     return BeautifulSoup(sugarWP, 'html.parser')
@@ -13,6 +15,8 @@ sugarSoup = create_beautifulSoup_main()
 
 #TODO: This looks ugly
 def get_conditions_dict(): 
+    print("inside sugar getconditions ")
+    sys.stdout.flush() 
     # Is there a way to add this to a dictionary without involving a list? 
     if sugarSoup.find('table', class_ = "smrcctable").find('td').get_text() == 'SNOWMAKING IN PROGRESS':
         sugar_conditions_list = []
@@ -28,7 +32,9 @@ def get_conditions_dict():
         sugar_conditions_list.append('NOT IN PROGRESS')
     sugar_conditions_dict = {sugar_conditions_list[i]: 
                             sugar_conditions_list[i+1] 
-                            for i in range(0, len(sugar_conditions_list), 2)}          
+                            for i in range(0, len(sugar_conditions_list), 2)} 
+    print("end sugar getconditions ")
+    sys.stdout.flush()         
     return sugar_conditions_dict
 
 
@@ -42,6 +48,8 @@ def create_beautifulSoup_sugartrailmap():
 sugarTags = create_beautifulSoup_sugartrailmap()
 
 def get_lift_dict():
+    print("inside sugar getlift ")
+    sys.stdout.flush()
     # sugarTags = create_beautifulSoup_sugartrailmap()
     # Gets Lifts. Had to use next_sibling instead of get_text()
     # Note: .get('alt') might not be accurate. May need to switch to .get('src')
@@ -50,6 +58,8 @@ def get_lift_dict():
 # TODO: Clean this up
 def get_slope_dict():
     # sugarTags = create_beautifulSoup_sugartrailmap()
+    print("inside sugar getslope")
+    sys.stdout.flush()
     sugar_slope_dict = {}
     # Get Black Diamond Runs. These all used .get_text(), so I grouped them together. 
     # Odd indexes were skipped, as they were just labels

@@ -25,9 +25,11 @@ class ResortDB(db.Model):
 
  
 def populate_db_conditions(dictToUse, rname, slc):
- for k, v in dictToUse.items():
+print("inside pop db")
+sys.stdout.flush()
+    for k, v in dictToUse.items():
         now = datetime.now(timezone('America/New_York'))
-        update_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+        update_time = now.strftime("%m/%d/%Y, %I:%M:%S %p")
         newCond = ResortDB(resort = rname, slc = slc, name = k, status = v, updated_on = update_time)
         try:
             db.session.add(newCond)
@@ -36,6 +38,8 @@ def populate_db_conditions(dictToUse, rname, slc):
             print("Problem with adding conditions") 
 
 def delete_everthing(modelToDelete):
+    print("inside deletdb")
+    sys.stdout.flush()
     db.session.query(modelToDelete).delete()
     db.session.commit()
 
@@ -52,26 +56,37 @@ def update_db():
     populate_db_conditions(cataWS.get_slope_dict(), "Cata", "slope")
     populate_db_conditions(cataWS.get_conditions_dict(), "Cata", "cond")
     populate_db_conditions(cataWS.get_lift_dict(), "Cata", "lift")
+    print("inside update db: cata done")
+    sys.stdout.flush()
 
     populate_db_conditions(beechWS.get_conditions_dict(), "Ski Beech", "cond")
     populate_db_conditions(beechWS.get_lift_dict(), "Ski Beech", "lift")
     populate_db_conditions(beechWS.get_slope_dict(), "Ski Beech", "slope")
+    print("inside update db: beech done")
+    sys.stdout.flush()
 
     populate_db_conditions(sugarWS.get_conditions_dict(), "Ski Sugar", "cond")
     populate_db_conditions(sugarWS.get_lift_dict(), "Ski Sugar", "lift")
     populate_db_conditions(sugarWS.get_slope_dict(), "Ski Sugar", "slope")
+    print("inside update db: sugar done")
+    sys.stdout.flush()
 
     populate_db_conditions(wolfridgeWS.get_conditions_dict(), "Wolf", "cond")
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
+    print("inside update db: wolf done")
+    sys.stdout.flush()
 
-
-@scheduler.task('interval', id='sched_job', minutes=30, misfire_grace_time=900)
+@scheduler.task('interval', id='sched_job', minutes=5, misfire_grace_time=900)
 def sched_job():
      print("Inside Scheduled Task")
      sys.stdout.flush()
      delete_everthing(ResortDB)
+     print("inside sched_job: after delete")
+    sys.stdout.flush()
      update_db()
+     print("inside sched_job: after update")
+     sys.stdout.flush()
      time.sleep(20)
 
 scheduler.start()     
@@ -110,5 +125,6 @@ def about():
 
 if __name__ == '__main__':
     db.create_all()
-      
+    # delete_everthing(ResortDB)
+    # update_db()
     app.run(debug=False)    
