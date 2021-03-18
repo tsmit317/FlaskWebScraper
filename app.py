@@ -66,7 +66,7 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
 
-@scheduler.task('interval', id='sched_job', minutes=3, misfire_grace_time=900)
+@scheduler.task('interval', id='sched_job', minutes=30, misfire_grace_time=900)
 def sched_job():
      print("Inside Scheduled Task")
      sys.stdout.flush()
