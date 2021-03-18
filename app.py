@@ -5,6 +5,7 @@ from flask_apscheduler import APScheduler
 import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
 import sys
 import time
+from pytz import timezone
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
@@ -20,12 +21,12 @@ class ResortDB(db.Model):
     name = db.Column(db.String(100))
     status = db.Column(db.String(200))
     updated_on = db.Column(db.String(50))
-      
-        
+
+
  
 def populate_db_conditions(dictToUse, rname, slc):
  for k, v in dictToUse.items():
-        now = datetime.now()
+        now = datetime.now(timezone('America/New_York'))
         update_time = now.strftime("%m/%d/%Y, %H:%M:%S")
         newCond = ResortDB(resort = rname, slc = slc, name = k, status = v, updated_on = update_time)
         try:
@@ -65,7 +66,7 @@ def update_db():
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
 
 
-@scheduler.task('interval', id='sched_job', hours=1, misfire_grace_time=900)
+@scheduler.task('interval', id='sched_job', minutes=3, misfire_grace_time=900)
 def sched_job():
      print("Inside Scheduled Task")
      sys.stdout.flush()
@@ -110,4 +111,4 @@ def about():
 if __name__ == '__main__':
     db.create_all()
       
-    app.run(debug=True)    
+    app.run(debug=False)    

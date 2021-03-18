@@ -1,8 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
+import sys
 
 # Ski Beech
 def getSoup():
+    print('inside beech getSoup')
+    sys.stdout.flush()
     beechWPResponse = requests.get('https://www.beechmountainresort.com/mountain/winter-trail-map/')
     beechWP = beechWPResponse.content
     bsoup =  BeautifulSoup(beechWP, "html.parser")
