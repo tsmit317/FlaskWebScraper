@@ -25,8 +25,8 @@ class ResortDB(db.Model):
 
  
 def populate_db_conditions(dictToUse, rname, slc):
-print("inside pop db")
-sys.stdout.flush()
+    print("inside pop db")
+    sys.stdout.flush()
     for k, v in dictToUse.items():
         now = datetime.now(timezone('America/New_York'))
         update_time = now.strftime("%m/%d/%Y, %I:%M:%S %p")
@@ -79,15 +79,15 @@ def update_db():
 
 @scheduler.task('interval', id='sched_job', minutes=5, misfire_grace_time=900)
 def sched_job():
-     print("Inside Scheduled Task")
-     sys.stdout.flush()
-     delete_everthing(ResortDB)
-     print("inside sched_job: after delete")
+    print("Inside Scheduled Task")
     sys.stdout.flush()
-     update_db()
-     print("inside sched_job: after update")
-     sys.stdout.flush()
-     time.sleep(20)
+    delete_everthing(ResortDB)
+    print("inside sched_job: after delete")
+    sys.stdout.flush()
+    update_db()
+    print("inside sched_job: after update")
+    sys.stdout.flush()
+    time.sleep(20)
 
 scheduler.start()     
 
