@@ -4,7 +4,7 @@ import sys
 # Sugar Mountain Ski Resort
 # Gets Conditions from the main page
 def create_beautifulSoup_main(): 
-    print("cata getSoup")
+    print("suagr getSoup")
     sys.stdout.flush()
 
     sugarWPResponse = requests.get('http://www.skisugar.com/')
@@ -15,7 +15,7 @@ sugarSoup = create_beautifulSoup_main()
 
 
 def get_conditions_dict(): 
-    print("app getCond")
+    print("sugar getCond")
     sys.stdout.flush()
     # Is there a way to add this to a dictionary without involving a list? 
     if sugarSoup.find('table', class_ = "smrcctable").find('td').get_text() == 'SNOWMAKING IN PROGRESS':
@@ -47,7 +47,7 @@ def create_beautifulSoup_sugartrailmap():
 sugarTags = create_beautifulSoup_sugartrailmap()
 
 def get_lift_dict():
-    print("app getLift")
+    print("sugar getLift")
     sys.stdout.flush()
     # Gets Lifts. Had to use next_sibling instead of get_text()
     # Note: .get('alt') might not be accurate. May need to switch to .get('src')
@@ -55,7 +55,7 @@ def get_lift_dict():
 
 
 def get_slope_dict():
-    print("app getSlope")
+    print("sugar getSlope")
     sys.stdout.flush()
     # Get Black Diamond Runs. These all used .get_text(), so I grouped them together. 
     # Odd indexes were skipped, as they were just labels
