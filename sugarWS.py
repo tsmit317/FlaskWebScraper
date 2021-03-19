@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import sys
 # Sugar Mountain Ski Resort
 # Gets Conditions from the main page
-def create_beautifulSoup_main(): 
+def getSoup(): 
     print("suagr getSoup")
     sys.stdout.flush()
 
@@ -11,13 +11,13 @@ def create_beautifulSoup_main():
     sugarWP = sugarWPResponse.content
     return BeautifulSoup(sugarWP, 'html.parser')
     
-sugarSoup = create_beautifulSoup_main()
 
 
 def get_conditions_dict(): 
     print("sugar getCond")
     sys.stdout.flush()
     # Is there a way to add this to a dictionary without involving a list? 
+    sugarSoup = getSoup()
     if sugarSoup.find('table', class_ = "smrcctable").find('td').get_text() == 'SNOWMAKING IN PROGRESS':
         sugar_conditions_list = []
         for index, i in  enumerate(sugarSoup.find('table', class_ = "smrcctable").find_all('td')):
@@ -38,17 +38,17 @@ def get_conditions_dict():
 
 
 # Trail and Lift status from the trailmap webpage
-def create_beautifulSoup_sugartrailmap():
+def getSoup_sugartrailmap():
     sugarWPResponse = requests.get('http://www.skisugar.com/trailmap/')
     sugarWP = sugarWPResponse.content
     sugarSoup = BeautifulSoup(sugarWP, 'html.parser')
     return sugarSoup.find_all('p', attrs= {'style':"line-height: 18px;"})
     
-sugarTags = create_beautifulSoup_sugartrailmap()
 
 def get_lift_dict():
     print("sugar getLift")
     sys.stdout.flush()
+    sugarTags = getSoup_sugartrailmap()
     # Gets Lifts. Had to use next_sibling instead of get_text()
     # Note: .get('alt') might not be accurate. May need to switch to .get('src')
     return {i.next_sibling.strip(): i.get('alt') for i in sugarTags[0].find_all('img')}
@@ -57,6 +57,7 @@ def get_lift_dict():
 def get_slope_dict():
     print("sugar getSlope")
     sys.stdout.flush()
+    sugarTags = getSoup_sugartrailmap()
     # Get Black Diamond Runs. These all used .get_text(), so I grouped them together. 
     # Odd indexes were skipped, as they were just labels
     sugar_BlackDiamond_TagList = [sugarTags[2], sugarTags[4], sugarTags[6]]

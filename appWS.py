@@ -18,7 +18,7 @@ def get_conditions_dict():
     sys.stdout.flush()
 
     conditons_dict = {}            
-    for index, i in enumerate(appSoup.find_all('ul', class_ = 'slope-report__details')):
+    for index, i in enumerate(getSoup().find_all('ul', class_ = 'slope-report__details')):
         for j in i.find_all('li'):
             if index == 0:
                 conditons_dict['Temp ' + j.find('span', class_ = 'slope-report__details-label').get_text()] = j.find('span', class_ = 'slope-report__details-value').get_text()
@@ -41,7 +41,7 @@ def get_conditions_dict():
 def get_slope_dict():
     print("app getSlope")
     sys.stdout.flush()
-    appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
+    appSlopeUL = getSoup().find_all('ul', class_ = 'slope-report__status')
     return {i.find('span', class_ = 'slope-report__status-title').get_text():
             i.find('span', class_ = 'slope-report__status-status').get_text()
             for i in appSlopeUL[0].find_all('li')}
@@ -50,7 +50,7 @@ def get_slope_dict():
 def get_lift_dict(): 
     print("app getLift")
     sys.stdout.flush() 
-    appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
+    appSlopeUL = getSoup().find_all('ul', class_ = 'slope-report__status')
     return {i.find('span', class_ = 'slope-report__status-title').get_text():
             i.find('span', class_ = 'slope-report__status-status').get_text()
             for i in appSlopeUL[1].find_all('li')}

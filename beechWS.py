@@ -11,12 +11,12 @@ def getSoup():
     bsoup =  BeautifulSoup(beechWP, "html.parser")
     return bsoup
 
-beechSoup = getSoup()
+
 
 def get_lift_dict(): 
     print("beech getlift")
     sys.stdout.flush()
-    beech_sl_tag = beechSoup.find_all('td')
+    beech_sl_tag = getSoup().find_all('td')
     return {beech_sl_tag[i].text: 
             beech_sl_tag[i+1].text 
             for i in range(0, 15, 2)}
@@ -24,13 +24,13 @@ def get_lift_dict():
 def get_slope_dict(): 
     print("beech getslope")
     sys.stdout.flush()
-    beech_sl_tag = beechSoup.find_all('td')
+    beech_sl_tag = getSoup().find_all('td')
     return {beech_sl_tag[i].get_text(strip = True): 
                 beech_sl_tag[i+1].get_text(strip = True) 
                 for i in range(16, len(beech_sl_tag), 2)}
     
 def get_conditions_dict():
-    beechConditionsTags = beechSoup.find('div', class_ = 'overview').find_all('div')
+    beechConditionsTags = getSoup().find('div', class_ = 'overview').find_all('div')
     return {i.find('span').get_text(): 
             str(i.find(text=True, recursive=False)).replace('\n\t\t\t', '').replace('\t\t\t','').replace('\n', 'N/A') 
             for i in beechConditionsTags}

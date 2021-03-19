@@ -10,13 +10,13 @@ def getSoup():
     cSoup = BeautifulSoup(cataWP, 'html.parser')
     return cSoup
 
-cataSoup = getSoup()
+
 
 def get_conditions_dict():
     print("cata getDict")
     sys.stdout.flush()
     # Get tags containing conditions
-    cata_conditons = cataSoup.find_all('div', class_ = 'snow-report-overview')[1]
+    cata_conditons = getSoup().find_all('div', class_ = 'snow-report-overview')[1]
     cata_conditions_list = []
     # Not all tags contained text. Some contained images of check marks, so I had to loop through and check.
     for i in cata_conditons:
@@ -31,14 +31,14 @@ def get_conditions_dict():
 def get_slope_dict():
     print("cata getSlope")
     sys.stdout.flush()
-    cata_trail_columns =[i.get_text(strip = True) for i in cataSoup.find('table', class_='trails-table').find_all('td')]
+    cata_trail_columns =[i.get_text(strip = True) for i in getSoup().find('table', class_='trails-table').find_all('td')]
     return {cata_trail_columns[i]: cata_trail_columns[i + 1] for i in range(0, len(cata_trail_columns), 2)}
    
 
 def get_lift_dict():
     print("cata getLift")
     sys.stdout.flush()
-    cata_lifts_columns = [i.get_text(strip = True) for i in cataSoup.find('table', class_='lifts-table').find_all('td')]
+    cata_lifts_columns = [i.get_text(strip = True) for i in getSoup().find('table', class_='lifts-table').find_all('td')]
     return {cata_lifts_columns[i]: cata_lifts_columns[i + 1] for i in range(0, len(cata_lifts_columns), 2)}
  
 
