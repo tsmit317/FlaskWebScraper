@@ -1,9 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
-
+import sys
 # Sugar Mountain Ski Resort
 # Gets Conditions from the main page
 def create_beautifulSoup_main(): 
+    print("cata getSoup")
+    sys.stdout.flush()
+
     sugarWPResponse = requests.get('http://www.skisugar.com/')
     sugarWP = sugarWPResponse.content
     return BeautifulSoup(sugarWP, 'html.parser')
@@ -11,7 +14,9 @@ def create_beautifulSoup_main():
 sugarSoup = create_beautifulSoup_main()
 
 
-def get_conditions_dict():  
+def get_conditions_dict(): 
+    print("app getCond")
+    sys.stdout.flush()
     # Is there a way to add this to a dictionary without involving a list? 
     if sugarSoup.find('table', class_ = "smrcctable").find('td').get_text() == 'SNOWMAKING IN PROGRESS':
         sugar_conditions_list = []
@@ -42,12 +47,16 @@ def create_beautifulSoup_sugartrailmap():
 sugarTags = create_beautifulSoup_sugartrailmap()
 
 def get_lift_dict():
+    print("app getLift")
+    sys.stdout.flush()
     # Gets Lifts. Had to use next_sibling instead of get_text()
     # Note: .get('alt') might not be accurate. May need to switch to .get('src')
     return {i.next_sibling.strip(): i.get('alt') for i in sugarTags[0].find_all('img')}
 
 
 def get_slope_dict():
+    print("app getSlope")
+    sys.stdout.flush()
     # Get Black Diamond Runs. These all used .get_text(), so I grouped them together. 
     # Odd indexes were skipped, as they were just labels
     sugar_BlackDiamond_TagList = [sugarTags[2], sugarTags[4], sugarTags[6]]

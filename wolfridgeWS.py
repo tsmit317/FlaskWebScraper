@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-
+import sys
 #WolfRidge Ski Resort
 def getSoup():
+    print("wolf getSoup")
+    sys.stdout.flush()
     wolfWPResponse = requests.get('https://skiwolfridgenc.com/the-mountain/snow-report')
     wolfWP = wolfWPResponse.content
     wSoup = BeautifulSoup(wolfWP, 'html.parser')

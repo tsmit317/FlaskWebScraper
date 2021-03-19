@@ -7,6 +7,7 @@ import sys
 import time
 from pytz import timezone
 
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///resortDB.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -25,6 +26,9 @@ class ResortDB(db.Model):
 
  
 def populate_db_conditions(dictToUse, rname, slc):
+    print("populate db")
+    sys.stdout.flush()
+
     for k, v in dictToUse.items():
         now = datetime.now(timezone('America/New_York'))
         update_time = now.strftime("%m/%d/%Y, %I:%M:%S %p")
@@ -36,34 +40,50 @@ def populate_db_conditions(dictToUse, rname, slc):
             print("Problem with adding conditions") 
 
 def delete_everthing(modelToDelete):
+    print("db delete")
+    sys.stdout.flush()
+
     db.session.query(modelToDelete).delete()
     db.session.commit()
 
 def update_db():
-    
+    print("update db")
+    sys.stdout.flush()
     populate_db_conditions(appWS.get_conditions_dict(), "App", "cond")
     populate_db_conditions(appWS.get_slope_dict(), "App", "slope")
     populate_db_conditions(appWS.get_lift_dict(), "App", "lift")
-    
+    print("app udb: done")
+    sys.stdout.flush()
+
     populate_db_conditions(cataWS.get_slope_dict(), "Cata", "slope")
     populate_db_conditions(cataWS.get_conditions_dict(), "Cata", "cond")
     populate_db_conditions(cataWS.get_lift_dict(), "Cata", "lift")
+    print("cata udb: done")
+    sys.stdout.flush()
 
     populate_db_conditions(beechWS.get_conditions_dict(), "Ski Beech", "cond")
     populate_db_conditions(beechWS.get_lift_dict(), "Ski Beech", "lift")
     populate_db_conditions(beechWS.get_slope_dict(), "Ski Beech", "slope")
+    print("beech udb: done")
+    sys.stdout.flush()
 
     populate_db_conditions(sugarWS.get_conditions_dict(), "Ski Sugar", "cond")
     populate_db_conditions(sugarWS.get_lift_dict(), "Ski Sugar", "lift")
     populate_db_conditions(sugarWS.get_slope_dict(), "Ski Sugar", "slope")
+    print("sugar udb: done")
+    sys.stdout.flush()
 
     populate_db_conditions(wolfridgeWS.get_conditions_dict(), "Wolf", "cond")
     populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
     populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
-    
+    print("wolf udb: done")
+    sys.stdout.flush()
 
 @scheduler.scheduled_job('interval', id='sched_job', minutes=30 ,max_instances=1, misfire_grace_time=900)
 def sched_job():
+    print("sched_job")
+    sys.stdout.flush()
+
     delete_everthing(ResortDB)
     update_db()
     time.sleep(20)

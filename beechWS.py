@@ -4,6 +4,8 @@ import sys
 
 # Ski Beech
 def getSoup():
+    print("beech getSoup")
+    sys.stdout.flush()
     beechWPResponse = requests.get('https://www.beechmountainresort.com/mountain/winter-trail-map/')
     beechWP = beechWPResponse.content
     bsoup =  BeautifulSoup(beechWP, "html.parser")
@@ -12,12 +14,16 @@ def getSoup():
 beechSoup = getSoup()
 
 def get_lift_dict(): 
+    print("beech getlift")
+    sys.stdout.flush()
     beech_sl_tag = beechSoup.find_all('td')
     return {beech_sl_tag[i].text: 
             beech_sl_tag[i+1].text 
             for i in range(0, 15, 2)}
 
 def get_slope_dict(): 
+    print("beech getslope")
+    sys.stdout.flush()
     beech_sl_tag = beechSoup.find_all('td')
     return {beech_sl_tag[i].get_text(strip = True): 
                 beech_sl_tag[i+1].get_text(strip = True) 

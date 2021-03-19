@@ -1,9 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 import sys
-
 #Cataloochee Ski Resort
 def getSoup():
+    print("cata getSoup")
+    sys.stdout.flush()
     cataWPResponse = requests.get('https://cataloochee.com/the-mountain/snow-report/')
     cataWP = cataWPResponse.content
     cSoup = BeautifulSoup(cataWP, 'html.parser')
