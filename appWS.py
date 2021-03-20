@@ -11,7 +11,6 @@ def getSoup():
     asoup = BeautifulSoup(appWP, 'html.parser')
     return asoup
 
-appSoup = getSoup()
 
 def get_conditions_dict():
     print("app getCond")

@@ -79,7 +79,7 @@ def update_db():
     print("wolf udb: done")
     sys.stdout.flush()
 
-@scheduler.scheduled_job('interval', id='sched_job', hours=1 ,max_instances=1, misfire_grace_time=900, start_date='2021-03-19 21:00:00')
+@scheduler.scheduled_job('interval', id='sched_job', hours=1 ,max_instances=1, misfire_grace_time=900, next_run_time=datetime.now())
 def sched_job():
     print("sched_job")
     sys.stdout.flush()
