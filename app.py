@@ -2,7 +2,11 @@ from flask import Flask, render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
-import appWS, cataWS, beechWS, sugarWS, wolfridgeWS
+from appWS import App
+from cataWS import Cata
+from beechWS import Beech 
+from sugarWS import Sugar
+from wolfridgeWS import Wolf
 import sys
 import time
 from pytz import timezone
@@ -15,6 +19,13 @@ db = SQLAlchemy(app)
 scheduler = BackgroundScheduler()
 
 
+app_obj = App()
+beech_obj = Beech()
+cata_obj = Cata()
+sugar_obj = Sugar()
+wolf_obj = Wolf()
+
+
 class ResortDB(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     resort = db.Column(db.String(50))
@@ -24,7 +35,6 @@ class ResortDB(db.Model):
     updated_on = db.Column(db.String(50))
 
 
- 
 def populate_db_conditions(dictToUse, rname, slc):
     print("populate db")
     sys.stdout.flush()
@@ -39,6 +49,21 @@ def populate_db_conditions(dictToUse, rname, slc):
         except:
             print("Problem with adding conditions") 
 
+
+def update_ws_objects():
+    print("update_ws_objects: start")
+    sys.stdout.flush()
+
+    app_obj.update()
+    beech_obj.update()
+    cata_obj.update()
+    sugar_obj.update()
+    wolf_obj.update()
+
+    print("update_ws_objects: end")
+    sys.stdout.flush()
+
+
 def delete_everthing(modelToDelete):
     print("db delete")
     sys.stdout.flush()
@@ -46,44 +71,48 @@ def delete_everthing(modelToDelete):
     db.session.query(modelToDelete).delete()
     db.session.commit()
 
+
 def update_db():
     print("update db")
     sys.stdout.flush()
-    populate_db_conditions(appWS.get_conditions_dict(), "App", "cond")
-    populate_db_conditions(appWS.get_slope_dict(), "App", "slope")
-    populate_db_conditions(appWS.get_lift_dict(), "App", "lift")
+
+    populate_db_conditions(app_obj.get_conditions(), "App", "cond")
+    populate_db_conditions(app_obj.get_slope(), "App", "slope")
+    populate_db_conditions(app_obj.get_lift(), "App", "lift")
     print("app udb: done")
     sys.stdout.flush()
 
-    populate_db_conditions(cataWS.get_slope_dict(), "Cata", "slope")
-    populate_db_conditions(cataWS.get_conditions_dict(), "Cata", "cond")
-    populate_db_conditions(cataWS.get_lift_dict(), "Cata", "lift")
+    populate_db_conditions(cata_obj.get_conditions(), "Cata", "cond")
+    populate_db_conditions(cata_obj.get_slope(), "Cata", "slope")
+    populate_db_conditions(cata_obj.get_lift(), "Cata", "lift")
     print("cata udb: done")
     sys.stdout.flush()
 
-    populate_db_conditions(beechWS.get_conditions_dict(), "Ski Beech", "cond")
-    populate_db_conditions(beechWS.get_lift_dict(), "Ski Beech", "lift")
-    populate_db_conditions(beechWS.get_slope_dict(), "Ski Beech", "slope")
+    populate_db_conditions(beech_obj.get_conditions(), "Ski Beech", "cond")
+    populate_db_conditions(beech_obj.get_lift(), "Ski Beech", "lift")
+    populate_db_conditions(beech_obj.get_slope(), "Ski Beech", "slope")
     print("beech udb: done")
     sys.stdout.flush()
 
-    populate_db_conditions(sugarWS.get_conditions_dict(), "Ski Sugar", "cond")
-    populate_db_conditions(sugarWS.get_lift_dict(), "Ski Sugar", "lift")
-    populate_db_conditions(sugarWS.get_slope_dict(), "Ski Sugar", "slope")
+    populate_db_conditions(sugar_obj.get_conditions(), "Ski Sugar", "cond")
+    populate_db_conditions(sugar_obj.get_lift(), "Ski Sugar", "lift")
+    populate_db_conditions(sugar_obj.get_slope(), "Ski Sugar", "slope")
     print("sugar udb: done")
     sys.stdout.flush()
 
-    populate_db_conditions(wolfridgeWS.get_conditions_dict(), "Wolf", "cond")
-    populate_db_conditions(wolfridgeWS.get_lift_dict(), "Wolf", "lift")
-    populate_db_conditions(wolfridgeWS.get_slope_dict(), "Wolf", "slope")
+    populate_db_conditions(wolf_obj.get_conditions(), "Wolf", "cond")
+    populate_db_conditions(wolf_obj.get_lift(), "Wolf", "lift")
+    populate_db_conditions(wolf_obj.get_slope(), "Wolf", "slope")
     print("wolf udb: done")
     sys.stdout.flush()
+
 
 @scheduler.scheduled_job('interval', id='sched_job', hours=1 ,max_instances=1, misfire_grace_time=900, next_run_time=datetime.now())
 def sched_job():
     print("sched_job")
     sys.stdout.flush()
 
+    update_ws_objects()
     delete_everthing(ResortDB)
     update_db()
     time.sleep(20)
@@ -120,12 +149,14 @@ def home():
                             sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope, 
                             wrCond = wrCond, wrLift = wrLift, wrSlope = wrSlope)
 
+
 @app.route('/about/')
 def about():
     return render_template('about.html')
+
 
 if __name__ == '__main__':
     db.create_all()
     # delete_everthing(ResortDB)
     # update_db()
-    app.run(debug=True)    
+    app.run(debug=False)    
