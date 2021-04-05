@@ -4,6 +4,7 @@ import sys
 
 class Sugar():
 
+
     def __init__(self):
         self.conditons_dict = {}
         self.slope_dict = {}
