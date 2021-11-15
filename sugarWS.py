@@ -78,11 +78,12 @@ class Sugar():
     def update(self):
         print("suagrWS: update()")
         sys.stdout.flush()
-        sugarWPResponse = requests.get('http://www.skisugar.com/')
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        sugarWPResponse = requests.get('http://www.skisugar.com/', headers=headers)
         sugarWP = sugarWPResponse.content
         sugarSoupMain = BeautifulSoup(sugarWP, 'html.parser') # Gets Conditions from the main page
 
-        sugarWPResponseTrailmap = requests.get('http://www.skisugar.com/trailmap/')
+        sugarWPResponseTrailmap = requests.get('http://www.skisugar.com/trailmap/', headers=headers)
         sugarWPTrailmap = sugarWPResponseTrailmap.content
         sugarSoupTrailmap = BeautifulSoup(sugarWPTrailmap, 'html.parser')
         sugarTags =  sugarSoupTrailmap.find_all('p', attrs= {'style':"line-height: 18px;"})

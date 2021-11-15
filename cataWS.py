@@ -49,8 +49,8 @@ class Cata():
     def update(self):
         print("cataWS: update()")
         sys.stdout.flush()
-
-        cataWPResponse = requests.get('https://cataloochee.com/the-mountain/snow-report/')
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        cataWPResponse = requests.get('https://cataloochee.com/the-mountain/snow-report/', headers=headers)
         cataWP = cataWPResponse.content
         cataSoup = BeautifulSoup(cataWP, 'html.parser')
         self.conditons_dict = self.add_conditions(cataSoup)

@@ -45,7 +45,8 @@ class Beech():
         print("beechWS: update()")
         sys.stdout.flush()
 
-        beechWPResponse = requests.get('https://www.beechmountainresort.com/mountain/winter-trail-map/')
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        beechWPResponse = requests.get('https://www.beechmountainresort.com/mountain/winter-trail-map/', headers=headers)
         beechWP = beechWPResponse.content
         beechSoup = BeautifulSoup(beechWP, "html.parser")
 

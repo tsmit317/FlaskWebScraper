@@ -61,7 +61,8 @@ class App():
         print("appWS: update()")
         sys.stdout.flush()
 
-        appWPResponse = requests.get('https://www.appskimtn.com/slope-report')
+        headers = {'User-Agent': 'Mozilla/5.0 '}
+        appWPResponse = requests.get('https://www.appskimtn.com/slope-report', headers=headers)
         appWP = appWPResponse.content
         appSoup = BeautifulSoup(appWP, 'html.parser')
 

@@ -47,7 +47,8 @@ class Wolf():
     def update(self):
         print("wolfridgeWS: update()")
         sys.stdout.flush()
-        wolfWPResponse = requests.get('https://skiwolfridgenc.com/the-mountain/snow-report')
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        wolfWPResponse = requests.get('https://skiwolfridgenc.com/the-mountain/snow-report', headers=headers)
         wolfWP = wolfWPResponse.content
         wolfSoup = BeautifulSoup(wolfWP, 'html.parser')
         
