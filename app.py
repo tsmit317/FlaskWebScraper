@@ -127,6 +127,11 @@ scheduler.start()
 @app.route('/')
 def home():
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
+    
+    if (datetime.now() - datetime.strptime(appCond[0].updated_on,'%m/%d/%Y, %I:%M:%S %p')).seconds/3600 > 6:
+        scheduler.start()
+    
+    appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
     appSlope = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="slope").all()
     appLift = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="lift").all()
 
