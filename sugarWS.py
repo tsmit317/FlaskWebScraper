@@ -25,7 +25,8 @@ class Sugar():
                 else:
                     sugar_conditions_list.append(i.get_text(strip = True).replace('(MAP)', ""))
         else:
-            sugar_conditions_list = [i.get_text(strip = True).replace('(MAP)', "") for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')[:-2]]
+            sugar_conditions_list = [i.get_text(strip = True).replace('(MAP)', "") for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')[:4]]
+            print(sugarSoupMain.find('table', class_ = "smrcctable").find_all('td'))
             sugar_conditions_list.append('SNOWMAKING')
             sugar_conditions_list.append('NOT IN PROGRESS')
         sugar_conditions_dict = {sugar_conditions_list[i]: 
