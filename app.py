@@ -129,6 +129,7 @@ def home():
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
     
     if (datetime.now() - datetime.strptime(appCond[0].updated_on,'%m/%d/%Y, %I:%M:%S %p')).seconds/3600 > 6:
+        scheduler.shutdown()
         scheduler.start()
     
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
