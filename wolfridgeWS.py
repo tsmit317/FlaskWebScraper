@@ -18,7 +18,7 @@ class Wolf():
 
         wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
         return {row.find('td', class_='column-2').text: 
-                row.find('td', class_='column-3').text 
+                row.find('td', class_='column-3').text.title() 
                 for row in wr_lifts_table}
 
 
@@ -28,7 +28,7 @@ class Wolf():
 
         wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr') 
         return {row.find('td', class_ = 'column-3').get_text(): 
-                row.find('td', class_ = 'column-4').get_text() 
+                row.find('td', class_ = 'column-4').get_text().title() 
                 for row in wr_slopes_table[2:]}
 
 
@@ -38,7 +38,7 @@ class Wolf():
 
         wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
         wr_conditions_dict = {row.find('td', class_ = 'column-1').get_text():
-                            row.find('td', class_ = 'column-2').get_text() 
+                            row.find('td', class_ = 'column-2').get_text().title() 
                             for row in wr_conditions_table}
         wr_conditions_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}                       
         return wr_conditions_dict
