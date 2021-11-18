@@ -20,15 +20,25 @@ class Sugar():
             sugar_conditions_list = []
             for index, i in  enumerate(sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')):
                 if index == 0 and i.get_text() == 'SNOWMAKING IN PROGRESS':
-                    sugar_conditions_list.append('SNOWMAKING')
-                    sugar_conditions_list.append('IN PROGRESS') 
+                    sugar_conditions_list.append('Snowmaking')
+                    sugar_conditions_list.append('In Progress') 
                 else:
-                    sugar_conditions_list.append(i.get_text(strip = True).replace('(MAP)', ""))
+                    temp = i.get_text(strip = True).replace('(MAP)', "")
+                    if temp == "NUMBER OFLIFTS OPEN":
+                        sugar_conditions_list.append('Lifts Open')
+                    elif temp == "NUMBER OFSLOPES OPEN":
+                        sugar_conditions_list.append('Trails Open')
+                    else:
+                        sugar_conditions_list.append(temp)
+                    
         else:
-            sugar_conditions_list = [i.get_text(strip = True).replace('(MAP)', "") for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')[:4]]
-            print(sugarSoupMain.find('table', class_ = "smrcctable").find_all('td'))
-            sugar_conditions_list.append('SNOWMAKING')
-            sugar_conditions_list.append('NOT IN PROGRESS')
+            sugar_conditions_list = ["Lifts Open" if i.get_text(strip = True).replace('(MAP)', "") == "NUMBER OFLIFTS OPEN" else "Trails Open" if i.get_text(strip = True).replace('(MAP)', "") == "NUMBER OFSLOPES OPEN" else i.get_text(strip = True).replace('(MAP)', "")  for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')[:4]]
+
+            sugar_conditions_list.append('Snowmaking')
+            sugar_conditions_list.append('Not In Progress')
+            
+        temperature_list = [j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for j in i.find_all('span')[:2]]
+        sugar_conditions_list = [*temperature_list, *sugar_conditions_list]    
         sugar_conditions_dict = {sugar_conditions_list[i]: 
                                 sugar_conditions_list[i+1] 
                                 for i in range(0, len(sugar_conditions_list), 2)}          
