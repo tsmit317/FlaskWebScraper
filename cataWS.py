@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import sys
-
+import re
 
 class Cata():
 
@@ -35,7 +35,8 @@ class Cata():
         sys.stdout.flush()
 
         cata_trail_columns =[i.get_text(strip = True) for i in cataSoup.find('table', class_='trails-table').find_all('td')]
-        return {cata_trail_columns[i]: cata_trail_columns[i + 1] for i in range(0, len(cata_trail_columns), 2)}
+        # If statement removes vertical feet from string if it is there
+        return {(' '.join(cata_trail_columns[i].split(' ')[:-1]) if cata_trail_columns[i][-1] == "'" else cata_trail_columns[i]): cata_trail_columns[i + 1] for i in range(0, len(cata_trail_columns), 2)}
     
 
     def add_lift(self, cataSoup):
@@ -43,7 +44,8 @@ class Cata():
         sys.stdout.flush()
 
         cata_lifts_columns = [i.get_text(strip = True) for i in cataSoup.find('table', class_='lifts-table').find_all('td')]
-        return {cata_lifts_columns[i]: cata_lifts_columns[i + 1] for i in range(0, len(cata_lifts_columns), 2)}
+        # regex removes parentheses from lift name. ie '(quad)'. Would just use split but there is a space on the last 'wolf creeck ( conveyor)'
+        return {re.sub("[\(\[].*?[\)\]]", "", cata_lifts_columns[i]): cata_lifts_columns[i + 1] for i in range(0, len(cata_lifts_columns), 2)}
     
 
     def update(self):
