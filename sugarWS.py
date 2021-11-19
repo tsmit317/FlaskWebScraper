@@ -10,7 +10,13 @@ class Sugar():
         self.slope_dict = {}
         self.lift_dict = {}
     
-
+    def replace_all_cap(self, cond_list):
+        to_replace = {'NUMBER OFLIFTS OPEN': 'Lifts Open', 'NUMBER OFSLOPES OPEN': 'Trails Open', 'AVERAGEDEPTH': 'Average Depth'}
+        for i, val in enumerate(cond_list):
+            if val in to_replace:
+                cond_list[i] = to_replace[val]
+        
+    
     #TODO: This looks ugly
     def add_conditions(self, sugarSoupMain): 
         print("suagrWS: add_conditions()")
@@ -23,21 +29,16 @@ class Sugar():
                     sugar_conditions_list.append('Snowmaking')
                     sugar_conditions_list.append('In Progress') 
                 else:
-                    temp = i.get_text(strip = True).replace('(MAP)', "")
-                    if temp == "NUMBER OFLIFTS OPEN":
-                        sugar_conditions_list.append('Lifts Open')
-                    elif temp == "NUMBER OFSLOPES OPEN":
-                        sugar_conditions_list.append('Trails Open')
-                    else:
-                        sugar_conditions_list.append(temp)
+                    sugar_conditions_list.append(i.get_text(strip = True).replace('(MAP)', ""))
                     
         else:
-            sugar_conditions_list = ["Lifts Open" if i.get_text(strip = True).replace('(MAP)', "") == "NUMBER OFLIFTS OPEN" else "Trails Open" if i.get_text(strip = True).replace('(MAP)', "") == "NUMBER OFSLOPES OPEN" else i.get_text(strip = True).replace('(MAP)', "")  for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')[:4]]
+            sugar_conditions_list = [i.get_text(strip = True).replace('(MAP)', "") for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')]
 
             sugar_conditions_list.append('Snowmaking')
             sugar_conditions_list.append('Not In Progress')
             
         temperature_list = [j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for j in i.find_all('span')[:2]]
+        self.replace_all_cap(sugar_conditions_list)
         sugar_conditions_list = [*temperature_list, *sugar_conditions_list]    
         sugar_conditions_dict = {sugar_conditions_list[i]: 
                                 sugar_conditions_list[i+1] 
