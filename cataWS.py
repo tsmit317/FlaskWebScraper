@@ -25,6 +25,8 @@ class Cata():
                 cata_conditions_list.append('Yes')
             elif i.find('i') and (not i.find('i', class_='fas fa-check')):
                 cata_conditions_list.append('No')
+            elif i.get_text() == '':
+                cata_conditions_list.append('N/A')
             else:
                 cata_conditions_list.append(i.get_text())
         return {cata_conditions_list[i+1]: cata_conditions_list[i] for i in range(0, len(cata_conditions_list), 2)} 
