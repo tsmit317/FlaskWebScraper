@@ -32,6 +32,7 @@ div{
 
 caption{
     padding: 8px;
+    margin:2.5px, 2.5px, 2.5px, 0px;
     background-color: white;
 }
 
@@ -47,7 +48,7 @@ td {
 }
 
 th {
-    text-align: center;
+    /* text-align: center; */
 }
 
 img {
@@ -70,13 +71,13 @@ table.app {
     border-bottom: 2px solid #bb472a;
     border-left: 2px solid #bb472a;
     border-right: 2px solid #bb472a;
-    border-radius: 0px 0px 3px 3px;
+    /* border-radius: 0px 0px 3px 3px; */
 }
 
 table.app caption {
-    border-top: 2px solid #bb472a;
-    border-left: 2px solid #bb472a;
-    border-right: 2px solid #bb472a;
+    border-top: 2.5px solid #bb472a;
+    border-left: 2.5px solid #bb472a;
+    border-right: 2.5px solid #bb472a;
 }
 
 table.app th {
@@ -89,15 +90,15 @@ table.app th, td {
 }
 
 table.beech {
-    border-bottom: 2px solid #00adef;
-    border-left: 2px solid #00adef;
-    border-right: 2px solid #00adef;
+    border-bottom: 2.5px solid #00adef;
+    border-left: 2.5px solid #00adef;
+    border-right: 2.5px solid #00adef;
 }
 
 table.beech caption {
-    border-top: 2px solid #00adef;
-    border-left: 2px solid #00adef;
-    border-right: 2px solid #00adef;
+    border-top: 2.5px solid #00adef;
+    border-left: 2.5px solid #00adef;
+    border-right: 2.5px solid #00adef;
 }
 
 table.beech th {
@@ -110,15 +111,15 @@ table.beech th, td {
 }
 
 table.cataloochee{
-    border-bottom: 2px solid #0076bf;
-    border-left: 2px solid #0076bf;
-    border-right: 2px solid #0076bf;
+    border-bottom: 2.5px solid #0076bf;
+    border-left: 2.5px solid #0076bf;
+    border-right: 2.5px solid #0076bf;
 }
 
 table.cataloochee caption{
-    border-top: 2px solid #0076bf;
-    border-left: 2px solid #0076bf;
-    border-right: 2px solid #0076bf;
+    border-top: 2.5px solid #0076bf;
+    border-left: 2.5px solid #0076bf;
+    border-right: 2.5px solid #0076bf;
 }
 
 table.cataloochee th {
@@ -131,15 +132,15 @@ table.cataloochee th, td {
 }
 
 table.sugar {
-    border-bottom: 2px solid #30b457;
-    border-left: 2px solid #30b457;
-    border-right: 2px solid #30b457;
+    border-bottom: 2.5px solid #30b457;
+    border-left: 2.5px solid #30b457;
+    border-right: 2.5px solid #30b457;
 }
 
 table.sugar caption {
-    border-top: 2px solid #30b457;
-    border-left: 2px solid #30b457;
-    border-right: 2px solid #30b457;
+    border-top: 2.5px solid #30b457;
+    border-left: 2.5px solid #30b457;
+    border-right: 2.5px solid #30b457;
 }
 
 table.sugar th {
@@ -152,15 +153,15 @@ table.sugar th, td {
 }
 
 table.wolfridge {
-    border-bottom: 2px solid #6e2306;
-    border-left: 2px solid #6e2306;
-    border-right: 2px solid #6e2306;
+    border-bottom: 2.5px solid #6e2306;
+    border-left: 2.5px solid #6e2306;
+    border-right: 2.5px solid #6e2306;
 }
 
 table.wolfridge caption {
-    border-top: 2px solid #6e2306;
-    border-left: 2px solid #6e2306;
-    border-right: 2px solid #6e2306;
+    border-top: 2.5px solid #6e2306;
+    border-left: 2.5px solid #6e2306;
+    border-right: 2.5px solid #6e2306;
 }
 
 table.wolfridge th {
@@ -173,6 +174,7 @@ table.wolfridge th, td{
 }
 
 .table_head_image {
+    caption-side: top !important;
     position: sticky;
     top: 0;
 }
@@ -238,4 +240,11 @@ table.wolfridge th, td{
     margin-top: 20px;
     margin-bottom: 40px;
     text-align: center;
+}
+
+.oc-icon{
+    height:1.5em;
+    width:1.5em;
+    padding:0px;
+    margin: 0px;
 }
