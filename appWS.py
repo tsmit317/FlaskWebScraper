@@ -9,7 +9,7 @@ class App():
         self.conditons_dict = {}
         self.slope_dict = {}
         self.lift_dict = {}
-    
+
 
     # TODO: Fix this monstrosity
     def add_conditions(self, appSoup):
@@ -18,9 +18,14 @@ class App():
 
         conditons_dict = {}            
         for index, i in enumerate(appSoup.find_all('ul', class_ = 'slope-report__details')):
-            for j in i.find_all('li'):
+            for j_index, j in enumerate(i.find_all('li')):
                 if index == 0:
-                    conditons_dict['Temp ' + j.find('span', class_ = 'slope-report__details-label').get_text()] = j.find('span', class_ = 'slope-report__details-value').get_text()
+                    if j_index == 0:
+                        conditons_dict['Temp ' + j.find('span', class_ = 'slope-report__details-label').get_text()] = j.find('span', class_ = 'slope-report__details-value').get_text() + 'F'
+                    elif j_index == 1:
+                        conditons_dict['Temp High/Low'] = j.find('span', class_ = 'slope-report__details-value').get_text()
+                    elif j_index == 2:
+                        conditons_dict['Temp High/Low'] += '/'+ j.find('span', class_ = 'slope-report__details-value').get_text() + 'F'
                 elif index == 1:
                     if j.find('span', class_ = 'slope-report__details-value'):
                         conditons_dict['Snowmaking ' + j.find('span', class_ = 'slope-report__details-label').get_text()] = j.find('span', class_ = 'slope-report__details-value').get_text()
