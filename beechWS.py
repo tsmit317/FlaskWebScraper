@@ -16,7 +16,7 @@ class Beech():
         sys.stdout.flush()
 
         beech_sl_tag = beechSoup.find_all('td')
-        return {beech_sl_tag[i].text: 
+        self.lift_dict = {beech_sl_tag[i].text: 
                 beech_sl_tag[i+1].text 
                 for i in range(0, 15, 2)}
 
@@ -26,7 +26,7 @@ class Beech():
         sys.stdout.flush()
 
         beech_sl_tag = beechSoup.find_all('td')
-        return {beech_sl_tag[i].get_text(strip = True): 
+        self.slope_dict = {beech_sl_tag[i].get_text(strip = True): 
                     beech_sl_tag[i+1].get_text(strip = True) 
                     for i in range(16, len(beech_sl_tag), 2)}
         
@@ -36,10 +36,21 @@ class Beech():
         sys.stdout.flush()
         
         beechConditionsTags = beechSoup.find('div', class_ = 'overview').find_all('div')
-        return {i.find('span').get_text(): 
+        cond_dict = {i.find('span').get_text(): 
                 str(i.find(text=True, recursive=False)).replace('\n\t\t\t', '').replace('\t\t\t','').replace('\n', 'N/A') 
                 for i in beechConditionsTags}
 
+        if cond_dict['Night Skiing'] == 'No':
+            cond_dict['Night Skiing'] = 'Closed'
+        elif cond_dict['Night Skiing'] == 'Yes':
+            cond_dict['Night Skiing'] = 'Open'
+            
+        if cond_dict['Primary Surface'] == 'Machine Groomed':
+            cond_dict['Primary Surface'] = 'Groomed'
+        
+        if cond_dict['New Snow'] == '0':
+            cond_dict['New Snow'] = '0"'
+        self.conditons_dict = cond_dict
 
     def update(self):
         print("beechWS: update()")
@@ -50,10 +61,11 @@ class Beech():
         beechWP = beechWPResponse.content
         beechSoup = BeautifulSoup(beechWP, "html.parser")
 
-        self.conditons_dict = self.add_conditions(beechSoup)
-        self.slope_dict = self.add_slope(beechSoup)
-        self.lift_dict = self.add_lift(beechSoup)
-
+        self.add_conditions(beechSoup)
+        self.add_slope(beechSoup)
+        self.add_lift(beechSoup)
+        
+        
     def get_conditions(self):
         return self.conditons_dict
     
