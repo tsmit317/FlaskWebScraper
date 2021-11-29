@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block head %}
 <head>
-    <title>NC Ski Resort Conditions</title>
+    <title>Ski NC</title>
 </head>
 {% endblock %}
 
@@ -12,12 +12,12 @@
 </div>
 
 <div class="titleupdate">
-    <h1>North Carolina Ski Resort Conditions</h1>
+    <h1>Ski NC</h1>
     <p>Last Updated: {{beechCond[0].updated_on}}</p>
 </div>
 
 <div>
-    <table class="app">
+    <table class="app darker-bg">
         <caption class='table_head_image text-center'><a href="https://appskimtn.com/" target="_blank"><img src="static\images\appIMG.jpg"></a></caption>
         
         <tbody>
@@ -27,6 +27,10 @@
             <tr>
                 <th class='text-center'>Conditon</th>
                 <th class='text-center'>Status</th>
+            </tr>
+            <tr>
+                <td class = "pt-1 pb-1">{{appWeather['desc']}}</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;"><span><img src={{appWeather['icon']}} class="weather-icon"></span></td>
             </tr>
             {% for cond in appCond %}
             <tr>
@@ -99,14 +103,20 @@
                 <th class='text-center'>Condition</th>
                 <th class='text-center'>Status</th>
             </tr>
+            <tr>
+                <td class = "pt-1 pb-1">{{beechWeather['desc']}}</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;"><span><img src={{beechWeather['icon']}} class="weather-icon"></span></td>
+            </tr>
             {% for cond in beechCond%}
             <tr>
                 <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
-                <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}" style="padding-left:15%;">
+                <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}" style="padding-left:15%; ">
                 {% if cond.status == 'Closed' %}
                     <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                 {% elif cond.status == 'Open' %}
                     <span><i class="bi bi-check-square-fill" style="color:#12AF00;"></i></span> {{cond.status}}
+                {% elif cond.status == 'On' and cond.name == 'Snowmaking'%}
+                    <span><i class="bi bi-snow2"  style="color:#12AF00;"></i></span> {{cond.status}}
                 {% else %}
                     {{cond.status}}
                 {% endif %}
@@ -171,6 +181,14 @@
                 <th class='text-center'>Conditon</th>
                 <th class='text-center'>Status</th>
             </tr>
+            <tr>
+                <td class = "pt-1 pb-1">{{cataWeather['desc']}}</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;"><span><img src={{cataWeather['icon']}} class="weather-icon"></span></td>
+            </tr>
+            <tr>
+                <td class = "pt-1 pb-1">Temp</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;">{{cataWeather['temp']}}</td>
+            </tr>
             {% for cond in cataCond %}
             <tr>
                 <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
@@ -179,6 +197,8 @@
                     <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                 {% elif cond.status == 'Open' %}
                     <span><i class="bi bi-check-square-fill" style="color:#12AF00;"></i></span> {{cond.status}}
+                {% elif cond.status == 'On' and cond.name == 'Snowmaking'%}
+                    <span><i class="bi bi-snow2"  style="color:#12AF00;"></i></span> {{cond.status}}
                 {% else %}
                     {{cond.status}}
                 {% endif %}
@@ -241,6 +261,10 @@
                 <th class='text-center'>Conditon</th>
                 <th class='text-center'>Status</th>
             </tr>
+            <tr>
+                <td class = "pt-1 pb-1">{{sugarWeather['desc']}}</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;"><span><img src={{sugarWeather['icon']}} class="weather-icon"></span></td>
+            </tr>
             {% for cond in sugarCond %}
             <tr>
                 <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
@@ -249,6 +273,8 @@
                     <span><i class="bi bi-check-square-fill" style="color: red;"></i></span> {{cond.status}}
                 {% elif cond.status == 'Open' %}
                     <span><i class="bi bi-check-square-fill" style="color:#12AF00;"></i></span> {{cond.status}}
+                {% elif cond.status == 'On' and cond.name == 'Snowmaking'%}
+                    <span><i class="bi bi-snow2"  style="color:#12AF00;"></i></span> {{cond.status}}
                 {% else %}
                     {{cond.status}}
                 {% endif %}
@@ -262,8 +288,8 @@
             {% for slope in sugarSlope %}
             <tr>
                 
-                <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
-                <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}" style="padding-left:15%;">
+                <td class="pt-1 pb-0">{{slope.name}}</td>
+                <td class="pt-1 pb-0" style="padding-left:15%;">
                 {% if slope.status == 'Closed'%}
                     <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{slope.status}}
                 {% else %}
@@ -272,6 +298,9 @@
                 </td>
             </tr>    
             {%endfor%}
+            <tr>
+                <td class="pt-1 pb-2 text-center" colspan="2"><small>* Indicates slope has lights for night use</small></td>
+            </tr>
             <tr>
                 <th class='text-center'>Lift</th>
                 <th class='text-center'>Status</th>
@@ -311,6 +340,14 @@
                 <th class="text-center">Conditon</th>
                 <th class='text-center'>Status</th>
             </tr>
+            <tr>
+                <td class = "pt-1 pb-1">{{wrWeather['desc']}}</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;"><span><img src={{wrWeather['icon']}} class="weather-icon"></span></td>
+            </tr>
+            <tr>
+                <td class = "pt-1 pb-1">Temp</td>
+                <td class = "pt-1 pb-1" style="padding-left:15%;">{{wrWeather['temp']}}</td>
+            </tr>
             {% for cond in wrCond %}
             <tr>
                 <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
@@ -319,6 +356,8 @@
                     <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                 {% elif cond.status == 'Open' %}
                     <span><i class="bi bi-check-square-fill" style="color:#02cf12;"></i></span> {{cond.status}}
+                {% elif cond.status == 'On' and cond.name == 'Snowmaking'%}
+                    <span><i class="bi bi-snow2"  style="color:#12AF00;"></i></span> {{cond.status}}
                 {% else %}
                     {{cond.status}}
                 {% endif %}
