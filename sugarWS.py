@@ -27,7 +27,7 @@ class Sugar():
             for index, i in  enumerate(sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')):
                 if index == 0 and i.get_text() == 'SNOWMAKING IN PROGRESS':
                     sugar_conditions_list.append('Snowmaking')
-                    sugar_conditions_list.append('In Progress') 
+                    sugar_conditions_list.append('On') 
                 else:
                     sugar_conditions_list.append(i.get_text(strip = True).replace('(MAP)', ""))
                     
@@ -35,15 +35,25 @@ class Sugar():
             sugar_conditions_list = [i.get_text(strip = True).replace('(MAP)', "") for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')]
 
             sugar_conditions_list.append('Snowmaking')
-            sugar_conditions_list.append('Not In Progress')
+            sugar_conditions_list.append('Off')
             
-        temperature_list = [j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for j in i.find_all('span')[:2]]
+        temperature_list = [j.get_text().title() + 'F' if index == 1 else  j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for index, j in enumerate(i.find_all('span')[:2])]
         self.replace_all_cap(sugar_conditions_list)
+        
+        sugar_conditions_list.insert(len(sugar_conditions_list)-2, 'Surface')
+        
+        if 'from 6pm until 10pm' in sugar_conditions_list[-1]:
+            sugar_conditions_list[-1] = 'Night Skiing'
+            sugar_conditions_list.append('Open')
+        else:
+            sugar_conditions_list[-1] = 'Night Skiing'
+            sugar_conditions_list.append('Open')
+            
         sugar_conditions_list = [*temperature_list, *sugar_conditions_list]    
         sugar_conditions_dict = {sugar_conditions_list[i]: 
                                 sugar_conditions_list[i+1] 
                                 for i in range(0, len(sugar_conditions_list), 2)}          
-        return sugar_conditions_dict
+        self.conditons_dict = sugar_conditions_dict
 
 
     def add_lift(self, sugarTags):
@@ -51,7 +61,7 @@ class Sugar():
         sys.stdout.flush()
         # Gets Lifts. Had to use next_sibling instead of get_text()
         # Note: .get('alt') might not be accurate. May need to switch to .get('src')
-        return {i.next_sibling.strip(): i.get('alt') for i in sugarTags[0].find_all('img')}
+        self.lift_dict = {i.next_sibling.strip(): i.get('alt') for i in sugarTags[0].find_all('img')}
 
 
     # TODO: Clean this up
@@ -85,7 +95,7 @@ class Sugar():
                     count += 1
                 else:
                     sugar_slope_dict[j.next_sibling.strip()] = j.get('alt')
-        return sugar_slope_dict
+        self.slope_dict = sugar_slope_dict
 
     def update(self):
         print("suagrWS: update()")
@@ -100,9 +110,9 @@ class Sugar():
         sugarSoupTrailmap = BeautifulSoup(sugarWPTrailmap, 'html.parser')
         sugarTags =  sugarSoupTrailmap.find_all('p', attrs= {'style':"line-height: 18px;"})
 
-        self.conditons_dict = self.add_conditions(sugarSoupMain)
-        self.slope_dict = self.add_slope(sugarTags)
-        self.lift_dict = self.add_lift(sugarTags)
+        self.add_conditions(sugarSoupMain)
+        self.add_slope(sugarTags)
+        self.add_lift(sugarTags)
 
 
     def get_conditions(self):

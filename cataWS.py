@@ -29,7 +29,7 @@ class Cata():
                 cata_conditions_list.append('N/A')
             else:
                 cata_conditions_list.append(i.get_text())
-        return {cata_conditions_list[i+1]: cata_conditions_list[i] for i in range(0, len(cata_conditions_list), 2)} 
+        self.conditons_dict = {cata_conditions_list[i+1].title(): cata_conditions_list[i].title() for i in range(0, len(cata_conditions_list), 2)} 
 
 
     def add_slope(self, cataSoup):
@@ -38,7 +38,7 @@ class Cata():
 
         cata_trail_columns =[i.get_text(strip = True) for i in cataSoup.find('table', class_='trails-table').find_all('td')]
         # If statement removes vertical feet from string if it is there
-        return {(' '.join(cata_trail_columns[i].split(' ')[:-1]) if cata_trail_columns[i][-1] == "'" else cata_trail_columns[i]): cata_trail_columns[i + 1] for i in range(0, len(cata_trail_columns), 2)}
+        self.slope_dict = {(' '.join(cata_trail_columns[i].split(' ')[:-1]) if cata_trail_columns[i][-1] == "'" else cata_trail_columns[i]): cata_trail_columns[i + 1] for i in range(0, len(cata_trail_columns), 2)}
     
 
     def add_lift(self, cataSoup):
@@ -47,7 +47,7 @@ class Cata():
 
         cata_lifts_columns = [i.get_text(strip = True) for i in cataSoup.find('table', class_='lifts-table').find_all('td')]
         # regex removes parentheses from lift name. ie '(quad)'. Would just use split but there is a space on the last 'wolf creeck ( conveyor)'
-        return {re.sub("[\(\[].*?[\)\]]", "", cata_lifts_columns[i]): cata_lifts_columns[i + 1] for i in range(0, len(cata_lifts_columns), 2)}
+        self.lift_dict = {re.sub("[\(\[].*?[\)\]]", "", cata_lifts_columns[i]): cata_lifts_columns[i + 1] for i in range(0, len(cata_lifts_columns), 2)}
     
 
     def update(self):
@@ -57,10 +57,20 @@ class Cata():
         cataWPResponse = requests.get('https://cataloochee.com/the-mountain/snow-report/', headers=headers)
         cataWP = cataWPResponse.content
         cataSoup = BeautifulSoup(cataWP, 'html.parser')
-        self.conditons_dict = self.add_conditions(cataSoup)
-        self.slope_dict = self.add_slope(cataSoup)
-        self.lift_dict = self.add_lift(cataSoup)
+        self.add_conditions(cataSoup)
+        self.add_slope(cataSoup)
+        self.add_lift(cataSoup)
+        
+        self.cond_check()
     
+    def cond_check(self):
+        if self.conditons_dict['Surface'] == "Machine Worked":
+            self.conditons_dict['Surface'] = "Groomed"
+        if self.conditons_dict['Snowmaking'] == "Yes":
+            self.conditons_dict['Snowmaking'] = "On"
+        if self.conditons_dict['Night Skiing'] == "Yes":
+            self.conditons_dict['Night Skiing'] = "Open"
+
 
     def get_conditions(self):
         return self.conditons_dict

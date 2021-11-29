@@ -17,7 +17,7 @@ class Wolf():
         sys.stdout.flush()
 
         wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
-        return {row.find('td', class_='column-2').text: 
+        self.lift_dict = {row.find('td', class_='column-2').text: 
                 row.find('td', class_='column-3').text.title() 
                 for row in wr_lifts_table}
 
@@ -27,7 +27,7 @@ class Wolf():
         sys.stdout.flush() 
 
         wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr') 
-        return {row.find('td', class_ = 'column-3').get_text(): 
+        self.slope_dict = {row.find('td', class_ = 'column-3').get_text(): 
                 row.find('td', class_ = 'column-4').get_text().title() 
                 for row in wr_slopes_table[2:]}
 
@@ -37,11 +37,27 @@ class Wolf():
         sys.stdout.flush()
 
         wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
-        wr_conditions_dict = {row.find('td', class_ = 'column-1').get_text():
-                            row.find('td', class_ = 'column-2').get_text().title() 
-                            for row in wr_conditions_table}
-        wr_conditions_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}                       
-        return wr_conditions_dict
+        print(wr_conditions_table)
+        wr_conditions_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
+                                else row.find('td', class_ = 'column-1').get_text(strip = True).replace(':', '')): row.find('td', class_ = 'column-2').get_text().title() 
+                                for row in wr_conditions_table}
+
+        print(wr_conditions_dict)
+        wr_conditions_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}    
+
+        if wr_conditions_dict['New Snow'] == '0':
+            wr_conditions_dict['New Snow'] += '"'
+            
+        if wr_conditions_dict['Snowmaking'] == 'No':
+            wr_conditions_dict['Snowmaking'] = 'Off'
+        elif wr_conditions_dict['Snowmaking'] == 'Yes':
+            wr_conditions_dict['Snowmaking'] = 'On'
+            
+        if wr_conditions_dict['Night Skiing'] == 'No':
+            wr_conditions_dict['Night Skiing'] = 'Closed'
+        elif wr_conditions_dict['Night Skiing'] == 'Yes':
+            wr_conditions_dict['Night Skiing'] = 'Open'
+        self.conditons_dict = wr_conditions_dict
 
     
     def update(self):
@@ -52,11 +68,11 @@ class Wolf():
         wolfWP = wolfWPResponse.content
         wolfSoup = BeautifulSoup(wolfWP, 'html.parser')
         
-        self.conditons_dict = self.add_conditions(wolfSoup)
-        self.slope_dict = self.add_slope(wolfSoup)
-        self.lift_dict = self.add_lift(wolfSoup)
+        self.add_conditions(wolfSoup)
+        self.add_slope(wolfSoup)
+        self.add_lift(wolfSoup)
     
-
+    
     def get_conditions(self):
         return self.conditons_dict
     
