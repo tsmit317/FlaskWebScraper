@@ -1,12 +1,13 @@
 from datetime import datetime
 import sys
 import time
+import os
 
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from pytz import timezone
-
+import requests
 from appWS import App
 from cataWS import Cata
 from beechWS import Beech 
@@ -123,6 +124,24 @@ def sched_job():
 
 scheduler.start()     
 
+def get_weather(lat, lon):
+    
+    # beech_lat_lon = 36.192907117543285, -81.87807586201936
+    # cata_lat_lon = 35.56216406965617, -83.09036834582928
+    # sugar_lat_lon = 36.128552597736494, -81.86381420634011
+    # wr_lat_lon = 35.952354672507575, -82.50723837684295
+    # app_lat_lon = 36.173957698179045, -81.66265630243835
+    
+    
+    api = os.environ.get('OPEN_WEATHER_API_KEY')
+    r = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api}&units=imperial")
+    
+    req=r.json()
+    
+
+    descr = req['weather'][0]['description'].title()
+    icon = req['weather'][0]['icon']
+    return {'desc': descr, 'icon': f"https://openweathermap.org/img/wn/{icon}.png", 'temp': str("{:.1f}".format(req['main']['temp'])) + '°F'}
 
 @app.route('/')
 def home():
@@ -135,11 +154,13 @@ def home():
     appCond = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="cond").all()
     appSlope = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="slope").all()
     appLift = ResortDB.query.filter(ResortDB.resort == "App").filter(ResortDB.slc=="lift").all()
+    
 
     cataCond = ResortDB.query.filter(ResortDB.resort == "Cata").filter(ResortDB.slc=="cond").all()
     cataSlope = ResortDB.query.filter(ResortDB.resort == "Cata").filter(ResortDB.slc=="slope").all()
     cataLift  = ResortDB.query.filter(ResortDB.resort == "Cata").filter(ResortDB.slc=="lift").all()
-
+    
+    
     beechCond = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="cond").all()
     beechSlope = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="slope").all()
     beechLift = ResortDB.query.filter(ResortDB.resort == "Ski Beech").filter(ResortDB.slc=="lift").all()
@@ -153,11 +174,11 @@ def home():
     wrLift = ResortDB.query.filter(ResortDB.resort == "Wolf").filter(ResortDB.slc=="lift").all()
     
     return render_template('home.html', 
-                            appCond = appCond, appLift = appLift, appSlope = appSlope,
-                            cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope,
-                            beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope,
-                            sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope, 
-                            wrCond = wrCond, wrLift = wrLift, wrSlope = wrSlope)
+                            appCond = appCond, appLift = appLift, appSlope = appSlope, appWeather = get_weather(36.173957698179045, -81.66265630243835),
+                            cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope, cataWeather = get_weather(35.56216406965617, -83.09036834582928),
+                            beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope, beechWeather = get_weather(36.192907117543285, -81.87807586201936),
+                            sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope, sugarWeather = get_weather(36.128552597736494, -81.86381420634011),
+                            wrCond = wrCond, wrLift = wrLift, wrSlope = wrSlope, wrWeather = get_weather(35.952354672507575, -82.50723837684295))
 
 
 @app.route('/about/')
