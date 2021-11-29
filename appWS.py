@@ -39,7 +39,7 @@ class App():
         
         if conditons_dict['New Snow']  == '':
             conditons_dict['New Snow'] = 'N/A'       
-        return conditons_dict
+        self.conditons_dict = conditons_dict
 
 
     def add_slope(self, appSoup):
@@ -47,7 +47,7 @@ class App():
         sys.stdout.flush()
 
         appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
-        return {i.find('span', class_ = 'slope-report__status-title').get_text():
+        self.slope_dict =  {i.find('span', class_ = 'slope-report__status-title').get_text():
                 i.find('span', class_ = 'slope-report__status-status').get_text()
                 for i in appSlopeUL[0].find_all('li')}
     
@@ -57,7 +57,7 @@ class App():
         sys.stdout.flush()
 
         appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
-        return {i.find('span', class_ = 'slope-report__status-title').get_text():
+        self.lift_dict = {i.find('span', class_ = 'slope-report__status-title').get_text():
                 i.find('span', class_ = 'slope-report__status-status').get_text()
                 for i in appSlopeUL[1].find_all('li')}
 
@@ -71,9 +71,9 @@ class App():
         appWP = appWPResponse.content
         appSoup = BeautifulSoup(appWP, 'html.parser')
 
-        self.conditons_dict = self.add_conditions(appSoup)
-        self.lift_dict = self.add_lift(appSoup)
-        self.slope_dict = self.add_slope(appSoup)
+        self.add_conditions(appSoup)
+        self.add_lift(appSoup)
+        self.add_slope(appSoup)
 
 
     def get_conditions(self):
