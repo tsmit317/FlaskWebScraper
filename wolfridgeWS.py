@@ -37,12 +37,10 @@ class Wolf():
         sys.stdout.flush()
 
         wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
-        print(wr_conditions_table)
         wr_conditions_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
                                 else row.find('td', class_ = 'column-1').get_text(strip = True).replace(':', '')): row.find('td', class_ = 'column-2').get_text().title() 
                                 for row in wr_conditions_table}
 
-        print(wr_conditions_dict)
         wr_conditions_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}    
 
         if wr_conditions_dict['New Snow'] == '0':
