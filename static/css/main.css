@@ -24,6 +24,7 @@ table {
     margin: 2px;
     float: left;
     margin-top: 20px;
+    
 }
 
 div{
@@ -45,10 +46,7 @@ td, th {
 td {
     text-align: left;
     word-break: keep-all;
-}
-
-th {
-    /* text-align: center; */
+    font-family: 'Outfit', sans-serif !important;
 }
 
 img {
@@ -86,7 +84,7 @@ table.app th {
 }
 
 table.app th, td { 
-    font-family: "Inter",sans-serif;
+    font-family: "Inter",sans-serif ;
 }
 
 table.beech {
@@ -245,6 +243,13 @@ table.wolfridge th, td{
 .oc-icon{
     height:1.5em;
     width:1.5em;
+    padding:0px;
+    margin: 0px;
+}
+
+.weather-icon{
+    height:3.5em;
+    width:3.5em;
     padding:0px;
     margin: 0px;
 }
