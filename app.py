@@ -133,8 +133,8 @@ def get_weather(lat, lon):
     # app_lat_lon = 36.173957698179045, -81.66265630243835
     
     
-    api = os.environ.get('OPEN_WEATHER_API_KEY')
-    r = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api}&units=imperial")
+    api_key = os.environ.get('OPEN_WEATHER_API_KEY')
+    r = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=imperial")
     
     req=r.json()
     
