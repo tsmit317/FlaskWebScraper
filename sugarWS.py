@@ -39,16 +39,22 @@ class Sugar():
             
         temperature_list = [j.get_text().title() + 'F' if index == 1 else  j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for index, j in enumerate(i.find_all('span')[:2])]
         self.replace_all_cap(sugar_conditions_list)
+       
         
-        sugar_conditions_list.insert(len(sugar_conditions_list)-2, 'Surface')
+        surface_index = [i for i, val in enumerate(sugar_conditions_list) if 'Manmade' in val][0]
+        sugar_conditions_list[surface_index] = 'Manmade'
+        sugar_conditions_list.insert(surface_index, 'Surface')
         
-        if 'from 6pm until 10pm' in sugar_conditions_list[-1]:
-            sugar_conditions_list[-1] = 'Night Skiing'
-            sugar_conditions_list.append('Open')
+        night_index = [i for i, val in enumerate(sugar_conditions_list) if 'Ski or ride with us today from 9am until 4:30pm' in val][0]
+        
+        if '6pm until 10p' in sugar_conditions_list[night_index]:
+            sugar_conditions_list[night_index] = 'Open'
+            sugar_conditions_list.insert(night_index, 'Night Skiing')
         else:
-            sugar_conditions_list[-1] = 'Night Skiing'
-            sugar_conditions_list.append('Open')
-            
+            sugar_conditions_list[night_index] = 'Closed'
+            sugar_conditions_list.insert(night_index, 'Night Skiing')
+        
+       
         sugar_conditions_list = [*temperature_list, *sugar_conditions_list]    
         sugar_conditions_dict = {sugar_conditions_list[i]: 
                                 sugar_conditions_list[i+1] 
