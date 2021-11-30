@@ -72,6 +72,8 @@ class Cata():
             self.conditons_dict['Snowmaking'] = "Off"
         if self.conditons_dict['Night Skiing'] == "Yes":
             self.conditons_dict['Night Skiing'] = "Open"
+        elif self.conditons_dict['Night Skiing'] == "No":
+            self.conditons_dict['Night Skiing'] = "Closed"
 
 
     def get_conditions(self):
