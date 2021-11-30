@@ -68,6 +68,8 @@ class Cata():
             self.conditons_dict['Surface'] = "Groomed"
         if self.conditons_dict['Snowmaking'] == "Yes":
             self.conditons_dict['Snowmaking'] = "On"
+        elif self.conditons_dict['Snowmaking'] == "No":
+            self.conditons_dict['Snowmaking'] = "Off"
         if self.conditons_dict['Night Skiing'] == "Yes":
             self.conditons_dict['Night Skiing'] = "Open"
 
