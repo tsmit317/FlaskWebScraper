@@ -65,7 +65,7 @@ img {
 }
 
 table.app {
-    margin-left: 25px;
+    /* margin-left: 25px; */
     border-bottom: 2px solid #bb472a;
     border-left: 2px solid #bb472a;
     border-right: 2px solid #bb472a;
