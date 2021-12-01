@@ -126,19 +126,11 @@ scheduler.start()
 
 def get_weather(lat, lon):
     
-    # beech_lat_lon = 36.192907117543285, -81.87807586201936
-    # cata_lat_lon = 35.56216406965617, -83.09036834582928
-    # sugar_lat_lon = 36.128552597736494, -81.86381420634011
-    # wr_lat_lon = 35.952354672507575, -82.50723837684295
-    # app_lat_lon = 36.173957698179045, -81.66265630243835
-    
-    
     api_key = os.environ.get('OPEN_WEATHER_API_KEY')
     r = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=imperial")
     
     req=r.json()
     
-
     descr = req['weather'][0]['description'].title()
     icon = req['weather'][0]['icon']
     return {'desc': descr, 'icon': f"https://openweathermap.org/img/wn/{icon}.png", 'temp': str("{:.1f}".format(req['main']['temp'])) + '°F'}
@@ -175,7 +167,7 @@ def home():
     
     return render_template('home.html', 
                             appCond = appCond, appLift = appLift, appSlope = appSlope, appWeather = get_weather(36.173957698179045, -81.66265630243835),
-                            cataCond = cataCond, cataLift = cataLift, cataSlope = cataSlope, cataWeather = get_weather(35.56216406965617, -83.09036834582928),
+                            cataCond = cataCond, cataLift = cataLift, cataSlope =cataSlope, cataWeather = get_weather(35.56216406965617, -83.09036834582928),
                             beechCond = beechCond, beechLift = beechLift, beechSlope= beechSlope, beechWeather = get_weather(36.192907117543285, -81.87807586201936),
                             sugarCond = sugarCond, sugarLift = sugarLift, sugarSlope = suagrSlope, sugarWeather = get_weather(36.128552597736494, -81.86381420634011),
                             wrCond = wrCond, wrLift = wrLift, wrSlope = wrSlope, wrWeather = get_weather(35.952354672507575, -82.50723837684295))
