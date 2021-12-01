@@ -39,10 +39,18 @@ class Sugar():
             
         temperature_list = [j.get_text().title() + 'F' if index == 1 else  j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for index, j in enumerate(i.find_all('span')[:2])]
         self.replace_all_cap(sugar_conditions_list)
-       
         
-        surface_index = [i for i, val in enumerate(sugar_conditions_list) if 'Manmade' in val][0]
-        sugar_conditions_list[surface_index] = 'Manmade'
+        print(sugar_conditions_list)
+        # TODO Adding key before these is being a pain since they constantly change.
+        # EXample: ['Lifts Open', '4 ', 'Trails Open', '10 ', 'Average Depth', '28-73″', 'Loose Granular& Frozen Granular', 'Ski or ride with us today from 9am until 4:30pm and again tonight from 6pm until 10pm.', 'Snowmaking', 'Off']
+        # ALSO - It isnt reading the table correctly. this is different than what is on inspect element. The p tags are not in the td tag
+        # <td class="smrcctd smrcc100 smrccfont2" colspan="2">Ski or ride with us today from 9am until 4:30pm and again tonight from 6pm until 10pm.</td></tr></table></p>
+        # <p>Snowmaking is not in progress.</p>
+        # <p>Ice skating is open with sessions at 10am, 12pm, 2pm, and 4pm.</p>
+        # <p>The tubing park is open with sessions at 10am, 12pm, 2pm, and 4pm.</p>
+        # <p>The Big Birch lift will open at 10am.
+        surface_index = [i for i, val in enumerate(sugar_conditions_list) if 'Granular' in val][0]
+        # sugar_conditions_list[surface_index] = 'Manmade'
         sugar_conditions_list.insert(surface_index, 'Surface')
         
         night_index = [i for i, val in enumerate(sugar_conditions_list) if 'Ski or ride with us today from 9am until 4:30pm' in val][0]
