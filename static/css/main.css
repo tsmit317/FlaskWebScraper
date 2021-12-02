@@ -198,10 +198,9 @@ table.wolfridge th, td{
 }
 
 .titleupdate {
-      margin-top: 2%;
-      
-      font-family: Georgia, serif;
-      font-variant: small-caps;
+    margin-top: 2%;
+    font-family: Georgia, serif;
+    font-variant: small-caps;
 }
 
 .abouttext {
