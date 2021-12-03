@@ -53,7 +53,7 @@ class Sugar():
         # sugar_conditions_list[surface_index] = 'Manmade'
         sugar_conditions_list.insert(surface_index, 'Surface')
         
-        night_index = [i for i, val in enumerate(sugar_conditions_list) if '6pm until 10pm' in val][0]
+        night_index = [i for i, val in enumerate(sugar_conditions_list) if 'Ski or ride with' in val][0]
         
         if '6pm until 10p' in sugar_conditions_list[night_index]:
             sugar_conditions_list[night_index] = 'Open'
