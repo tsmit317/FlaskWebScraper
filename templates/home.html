@@ -20,27 +20,27 @@
 </div>
 
 <div class="container-fluid">
-    <div class='row g-0 justify-content-center'>
+    <div class='row g-1 justify-content-center'>
         <div class='col-xl col-md-6 col-xs-12 '>
             <table class="table app">
                 <caption class='table_head_image text-center'><a href="https://appskimtn.com/" target="_blank"><img src="static\images\appIMG.jpg"></a></caption>
                 
                 <tbody>
-                    <tr>
-                        <td class="nameCap" colspan="2">Appalachian Ski Mountain</td>
+                    <tr class = "d-flex">
+                        <td class="col-12 nameCap">Appalachian Ski Mountain</td>
                     </tr>
-                    <tr>
-                        <th class='text-center'>Conditon</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Conditon</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">{{appWeather['desc']}}</td>
-                        <td class = "pt-1 pb-1"><div class="weather-icon-div text-center"><span><img src={{appWeather['icon']}} class="weather-icon"></span></div></td>
+                    <tr class = "d-flex">
+                        <td class = "col-6 pt-1 pb-1 align-self-center">{{appWeather['desc']}}</td>
+                        <td class = "col-6 ps-5 pt-1 pb-1"><div class="weather-icon-div text-center"><img src={{appWeather['icon']}} class="weather-icon"></div></td>
                     </tr>
                     {% for cond in appCond %}
-                    <tr>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}} text-wrap">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
                         {% if cond.status == 'Closed' %}
                             <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                         {% elif cond.status == 'Open' %}
@@ -52,14 +52,14 @@
                     
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th scope="col" >Slope</th>
-                        <th scope="col" >Status</th>
+                    <tr class = "d-flex">
+                        <th class="col-6 text-center">Slope</th>
+                        <th class="col-6 ps-5" >Status</th>
                     </tr>
                     {% for slope in appSlope %}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if slope.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{slope.status}}
                         {% else %}
@@ -68,14 +68,14 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th scope="col" >Lift</th>
-                        <th  scope="col" >Status</th>
+                    <tr class = "d-flex">
+                        <th class="col-6 text-center" >Lift</th>
+                        <th class="col-6 ps-5 " >Status</th>
                     </tr>
                     {% for lift in appLift%}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}" >
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if lift.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{lift.status}}
                         {% else %}
@@ -84,12 +84,12 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th colspan="2" class='text-center'>Other</th>
+                    <tr class = "d-flex">
+                        <th class='col-12 text-center'>Other</th>
                     </tr>  
-                    <tr>
-                        <td>Web Camera</td>
-                        <td><a href="https://appskimtn.com/live-cams" target="_blank">Link</a></td>
+                    <tr class = "d-flex">
+                        <td class='col-6'>Web Camera</td>
+                        <td class='col-6 ps-5'><a href="https://appskimtn.com/live-cams" target="_blank">Link</a></td>
                     </tr>
                 </tbody>    
             </table>
@@ -99,21 +99,21 @@
                 <caption class='table_head_image text-center'><a href="https://www.beechmountainresort.com/" target="_blank"><img src="static\images\beechIMG2.png"></a></caption>
                 
                 <tbody>
-                    <tr >
-                        <td class="nameCap" colspan="2">Ski Beech</td>
+                    <tr  class = "d-flex">
+                        <td class="col-12 nameCap">Ski Beech</td>
                     </tr>
-                    <tr>
-                        <th class='text-center'>Condition</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Condition</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">{{beechWeather['desc']}}</td>
-                        <td class = "pt-1 pb-1"><div class="weather-icon-div text-center"><span><img src={{beechWeather['icon']}} class="weather-icon"></span></div></td>
+                    <tr class = "d-flex">
+                        <td class = "align-self-center col-6 pt-1 pb-1" >{{beechWeather['desc']}}</td>
+                        <td class = "col-6 pt-1 pb-1 ps-5"><div class="weather-icon-div"><img src={{beechWeather['icon']}} class="weather-icon"></div></td>
                     </tr>
                     {% for cond in beechCond%}
-                    <tr>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}" >
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}" >
                         {% if cond.status == 'Closed' %}
                             <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                         {% elif cond.status == 'Open' %}
@@ -126,14 +126,14 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th class='text-center'>Slope</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Slope</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
                     {% for slope in beechSlope%}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if slope.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{slope.status}}
                         {% else %}
@@ -144,14 +144,14 @@
                         
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th class='text-center'>Lift</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Lift</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
                     {% for lift in beechLift%}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if lift.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{lift.status}}
                         {% else %}
@@ -160,12 +160,12 @@
                         </td>
                     </tr>
                     {%endfor%}
-                    <tr>
-                        <th colspan="2" class="text-center">Other</th>
+                    <tr class = "d-flex">
+                        <th class="col-12 text-center">Other</th>
                     </tr>   
-                    <tr>
-                        <td>Web Camera</td>
-                        <td><a href="https://www.beechmountainresort.com/mountain/webcams/" target="_blank">Link</a></td>
+                    <tr class = "d-flex">
+                        <td class = "col-6">Web Camera</td>
+                        <td class = "col-6 ps-5"><a href="https://www.beechmountainresort.com/mountain/webcams/" target="_blank">Link</a></td>
                     </tr>
                 </tbody>    
             </table>
@@ -175,25 +175,25 @@
                 <caption class='table_head_image text-center'><a href="https://cataloochee.com/" target="_blank"><img src="static\images\cataloocheeIMG.jpg"></a></caption>
                 
                 <tbody>
-                    <tr>
-                        <td class="nameCap" colspan="2">Cataloochee Ski Area</td>
+                    <tr class = "d-flex">
+                        <td class="col-12 nameCap">Cataloochee Ski Area</td>
                     </tr>
-                    <tr>
-                        <th class='text-center'>Conditon</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Conditon</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">{{cataWeather['desc']}}</td>
-                        <td class = "pt-1 pb-1"><div class="weather-icon-div text-center"><span><img src={{cataWeather['icon']}} class="weather-icon"></span></div></td>
+                    <tr class = "d-flex">
+                        <td class = "col-6 pt-1 pb-1 align-self-center">{{cataWeather['desc']}}</td>
+                        <td class = "col-6 pt-1 pb-1 ps-5 "><div class="weather-icon-div text-center"><img src={{cataWeather['icon']}} class="weather-icon"></div></td>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">Temp</td>
-                        <td class = "pt-1 pb-1">{{cataWeather['temp']}}</td>
+                    <tr class = "d-flex">
+                        <td class = "col-6 pt-1 pb-1">Temp</td>
+                        <td class = "col-6 pt-1 pb-1 ps-5 ">{{cataWeather['temp']}}</td>
                     </tr>
                     {% for cond in cataCond %}
-                    <tr>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
                         {% if cond.status == 'Closed' %}
                             <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                         {% elif cond.status == 'Open' %}
@@ -206,14 +206,14 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th class='text-center'>Slope</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Slope</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
                     {% for slope in cataSlope %}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if slope.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{slope.status}}
                         {% else %}
@@ -222,14 +222,14 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th class='text-center'>Lift</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Lift</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
                     {% for lift in cataLift%}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class=" col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if lift.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{lift.status}}
                         {% else %}
@@ -238,12 +238,12 @@
                         </td>
                     </tr>  
                     {%endfor%} 
-                    <tr>
-                        <th colspan="2" class='text-center'>Other</th>
+                    <tr class = "d-flex">
+                        <th class='col-12 text-center'>Other</th>
                     </tr>   
-                    <tr>
-                        <td>Web Camera</td>
-                        <td><a href="https://cataloochee.com/the-mountain/webcams/" target="_blank">Link</a></td>
+                    <tr class = "d-flex">
+                        <td class = "col-6">Web Camera</td>
+                        <td class = "col-6 ps-5 "><a href="https://cataloochee.com/the-mountain/webcams/" target="_blank">Link</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -253,21 +253,21 @@
                 <caption class='table_head_image text-center'><a href="http://www.skisugar.com/" target="_blank"><img src="static\images\sugarIMG.jpg"></a></caption>
                 
                 <tbody>
-                    <tr>
-                        <td class="nameCap" colspan="2">Ski Sugar</td>
+                    <tr class = "d-flex">
+                        <td class="col-12 nameCap">Ski Sugar</td>
                     </tr>
-                    <tr>
-                        <th class='text-center'>Conditon</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Conditon</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">{{sugarWeather['desc']}}</td>
-                        <td class = "pt-1 pb-1"><div class="weather-icon-div text-center"><span><img src={{sugarWeather['icon']}} class="weather-icon"></span></div></td>
+                    <tr class = "d-flex">
+                        <td class = "col-6 pt-1 pb-1 align-self-center">{{sugarWeather['desc']}}</td>
+                        <td class = "col-6 pt-1 pb-1 ps-5"><div class="weather-icon-div text-center"><img src={{sugarWeather['icon']}} class="weather-icon"></div></td>
                     </tr>
                     {% for cond in sugarCond %}
-                    <tr>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
                         {% if cond.status == 'Closed' %}
                             <span><i class="bi bi-check-square-fill" style="color: red;"></i></span> {{cond.status}}
                         {% elif cond.status == 'Open' %}
@@ -280,15 +280,15 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th class='text-center'>Slope</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Slope</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
                     {% for slope in sugarSlope %}
-                    <tr>
+                    <tr class = "d-flex">
                         
-                        <td class="pt-1 pb-0">{{slope.name}}</td>
-                        <td class="pt-1 pb-0">
+                        <td class="col-6 pt-1 pb-0">{{slope.name}}</td>
+                        <td class="col-6 pt-1 pb-0 ps-5">
                         {% if slope.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{slope.status}}
                         {% else %}
@@ -297,17 +297,17 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <td class="pt-1 pb-2 text-center" colspan="2"><small>* Indicates slope has lights for night use</small></td>
+                    <tr class = "d-flex">
+                        <td class="col-12 pt-1 pb-2 text-center" ><small>* Indicates slope has lights for night use</small></td>
                     </tr>
-                    <tr>
-                        <th class='text-center'>Lift</th>
-                        <th class='text-center'>Status</th>
+                    <tr class = "d-flex">
+                        <th class='col-6 text-center'>Lift</th>
+                        <th class='col-6 ps-5'>Status</th>
                     </tr>
                     {% for lift in sugarLift%}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class = "d-flex">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if lift.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{lift.status}}
                         {% else %}
@@ -316,12 +316,12 @@
                         </td>
                     </tr> 
                     {%endfor%} 
-                    <tr>
-                        <th colspan="2" class='text-center'>Other</th>
+                    <tr class = "d-flex">
+                        <th class='col-12 text-center'>Other</th>
                     </tr>  
-                    <tr>
-                        <td>Web Camera</td>
-                        <td><a href="http://www.skisugar.com/cams/" target="_blank">Link</a></td>
+                    <tr class = "d-flex">
+                        <td class="col-6">Web Camera</td>
+                        <td class='col-6 ps-5'><a href="http://www.skisugar.com/cams/" target="_blank">Link</a></td>
                     </tr>  
                 </tbody>
             </table>
@@ -331,25 +331,25 @@
                 <caption class='table_head_image text-center'><a href="https://skiwolfridgenc.com/" target="_blank"><img src="static\images\wolfridgeIMG.png"></a></caption>
 
                 <tbody>
-                    <tr>
-                        <td class="nameCap" colspan="2">Wolf Ridge Ski Resort</td>
+                    <tr class='d-flex'>
+                        <td class="col-12 nameCap">Wolf Ridge Ski Resort</td>
                     </tr>
-                    <tr>
-                        <th class="text-center">Conditon</th>
-                        <th class='text-center'>Status</th>
+                    <tr class='d-flex'>
+                        <th class="col-6 text-center">Conditon</th>
+                        <th class='col-6 ps-5 '>Status</th>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">{{wrWeather['desc']}}</td>
-                        <td class = "pt-1 pb-1"><div class="weather-icon-div text-center"><span><img src={{wrWeather['icon']}} class="weather-icon"></span></div></td>
+                    <tr class='d-flex'>
+                        <td class = "col-6 pt-1 pb-1 align-self-center">{{wrWeather['desc']}}</td>
+                        <td class = "col-6 pt-1 pb-1 ps-5 "><div class="weather-icon-div text-center"><img src={{wrWeather['icon']}} class="weather-icon"></div></td>
                     </tr>
-                    <tr>
-                        <td class = "pt-1 pb-1">Temp</td>
-                        <td class = "pt-1 pb-1">{{wrWeather['temp']}}</td>
+                    <tr class='d-flex'>
+                        <td class = "col-6 pt-1 pb-1">Temp</td>
+                        <td class = "col-6 pt-1 pb-1 ps-5 ">{{wrWeather['temp']}}</td>
                     </tr>
                     {% for cond in wrCond %}
-                    <tr>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
-                        <td class="{{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class='d-flex'>
+                        <td class="col-6 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">{{cond.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-1' if not loop.last else 'pt-1 pb-2'}}">
                         {% if cond.status == 'Closed' %}
                             <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{cond.status}}
                         {% elif cond.status == 'Open' %}
@@ -363,15 +363,15 @@
                     </tr>    
                     {%endfor%}
                     
-                    <tr>
-                        <th class='text-center'>Slope</th>
-                        <th class='text-center'>Status</th>
+                    <tr class='d-flex'>
+                        <th class='col-6 text-center'>Slope</th>
+                        <th class='col-6 ps-5 '>Status</th>
                     </tr>
                     {% for slope in wrSlope %}
-                    <tr>
+                    <tr class='d-flex'>
                         
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{slope.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if slope.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style=" color: red;"></i></span> {{slope.status}}
                         {% else %}
@@ -380,14 +380,14 @@
                         </td>
                     </tr>    
                     {%endfor%}
-                    <tr>
-                        <th class='text-center'>Lift</th>
-                        <th class='text-center'>Status</th>
+                    <tr class='d-flex'>
+                        <th class='col-6 text-center'>Lift</th>
+                        <th class='col-6 ps-5 '>Status</th>
                     </tr>
                     {% for lift in wrLift%}
-                    <tr>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
-                        <td class="{{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
+                    <tr class='d-flex'>
+                        <td class="col-6 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">{{lift.name}}</td>
+                        <td class="col-6 ps-5 {{'pt-1 pb-0' if not loop.last else 'pt-1 pb-2'}}">
                         {% if lift.status == 'Closed'%}
                             <span><i class="bi bi-x-square-fill" style="color: red;"></i></span> {{lift.status}}
                         {% else %}
@@ -396,12 +396,12 @@
                         </td>
                     </tr> 
                     {%endfor%}
-                    <tr>
-                        <th colspan="2" class='text-center'>Other</th>
+                    <tr class='d-flex'>
+                        <th class='col-12 text-center'>Other</th>
                     </tr>  
-                    <tr>
-                        <td>Web Camera</td>
-                        <td><a href="https://skiwolfridgenc.com/the-mountain/web-cam" target="_blank">Link</a></td>
+                    <tr class='d-flex'>
+                        <td class='col-6'>Web Camera</td>
+                        <td class='col-6 ps-5'><a href="https://skiwolfridgenc.com/the-mountain/web-cam" target="_blank">Link</a></td>
                     </tr>
                 </tbody>    
             </table>
