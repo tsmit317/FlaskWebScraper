@@ -11,7 +11,7 @@ class Sugar():
         self.lift_dict = {}
     
     def replace_all_cap(self, cond_list):
-        to_replace = {'NUMBER OFLIFTS OPEN': 'Lifts Open', 'NUMBER OFSLOPES OPEN': 'Trails Open', 'AVERAGEDEPTH': 'Average Depth', 'SNOWFALLLAST 24 HOURS': 'New Snow (24 Hrs)', 'SNOWFALLLAST STORM': 'Snow From Last Storm', 'ANNUALSNOWFALL': 'Total Snow This Year'}
+        to_replace = {'NUMBER OFLIFTS OPEN': 'Lifts Open', 'NUMBER OFSLOPES OPEN': 'Trails Open', 'AVERAGEDEPTH': 'Average Depth', 'SNOWFALLLAST 24 HOURS': 'New Snow (24 Hrs)', 'SNOWFALLLAST STORM': 'Last Storm Snowfall', 'ANNUALSNOWFALL': 'Total Snow This Year'}
         for i, val in enumerate(cond_list):
             if val in to_replace:
                 cond_list[i] = to_replace[val]
