@@ -130,7 +130,6 @@ def get_weather(lat, lon):
     r = requests.get(f"http://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=imperial")
     
     req=r.json()
-    
     descr = req['weather'][0]['description'].title()
     icon = req['weather'][0]['icon']
     return {'desc': descr, 'icon': f"https://openweathermap.org/img/wn/{icon}.png", 'temp': str("{:.1f}".format(req['main']['temp'])) + '°F'}
