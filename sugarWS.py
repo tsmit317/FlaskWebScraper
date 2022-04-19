@@ -23,32 +23,28 @@ class Sugar():
         print("suagrWS: add_conditions()")
         sys.stdout.flush()
 
+      
+        #Sugar took down the usual conditions table after the slopes closed for the season.
+        #Simply checks if the table is there. If not, just adds weather and status that the ski slopes are closed
         if not sugarSoupMain.find('table', class_ = "smrcctable"):
-            temperature_list = [j.get_text().title() + 'F' if index == 1 else  j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for index, j in enumerate(i.find_all('span')[:2])]
-            temp_dict = {temperature_list[i]: 
-                        temperature_list[i+1] 
-                        for i in range(0, len(temperature_list), 2)}
-
-            self.conditons_dict = temp_dict
+            for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2]:
+                self.conditons_dict[i.find('span', class_ = "smrwxfont1").get_text().title()] = i.find('span', class_ = "smrwxfont2").get_text() + 'F'
+            
             self.conditons_dict['Current Status'] = 'Closed'
-          
-       
+           
         else:
             # Is there a way to add this to a dictionary without involving a list? 
             if sugarSoupMain.find('table', class_ = "smrcctable").find('td').get_text() == 'SNOWMAKING IN PROGRESS':
                 sugar_conditions_list = []
                 for index, i in  enumerate(sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')):
                     if index == 0 and i.get_text() == 'SNOWMAKING IN PROGRESS':
-                        sugar_conditions_list.append('Snowmaking')
-                        sugar_conditions_list.append('On') 
+                        sugar_conditions_list.extend(['Snowmaking','On'])
                     else:
                         sugar_conditions_list.append(i.get_text(strip = True).replace('(MAP)', ""))
                         
             else:
                 sugar_conditions_list = [i.get_text(strip = True).replace('(MAP)', "") for i in sugarSoupMain.find('table', class_ = "smrcctable").find_all('td')]
-
-                sugar_conditions_list.append('Snowmaking')
-                sugar_conditions_list.append('Off')
+                sugar_conditions_list.extend(['Snowmaking','Off'])
                 
             temperature_list = [j.get_text().title() + 'F' if index == 1 else  j.get_text().title() for i in sugarSoupMain.find('table', class_ = "smrwxtable").find_all('td')[:2] for index, j in enumerate(i.find_all('span')[:2])]
             self.replace_all_cap(sugar_conditions_list)
