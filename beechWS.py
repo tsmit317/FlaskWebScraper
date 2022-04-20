@@ -27,21 +27,19 @@ class Beech():
 
     def add_conditions(self, beechSoup):
         beechConditionsTags = beechSoup.find('div', class_ = 'overview').find_all('div')
-        cond_dict = {i.find('span').get_text(): 
+        self.cond_dict = {i.find('span').get_text(): 
                 str(i.find(text=True, recursive=False)).replace('\n\t\t\t', '').replace('\t\t\t','').replace('\n', 'N/A') 
                 for i in beechConditionsTags}
 
-        if cond_dict['Night Skiing'] == 'No':
-            cond_dict['Night Skiing'] = 'Closed'
-        elif cond_dict['Night Skiing'] == 'Yes':
-            cond_dict['Night Skiing'] = 'Open'
-            
-        if cond_dict['Primary Surface'] == 'Machine Groomed':
-            cond_dict['Primary Surface'] = 'Groomed'
+        self.cond_dict['Night Skiing'] = 'Open' if self.cond_dict['Night Skiing'] == 'Yes' else 'Closed'
+
+       
+        if self.cond_dict['Primary Surface'] == 'Machine Groomed':
+            self.cond_dict['Primary Surface'] = 'Groomed'
         
-        if cond_dict['New Snow'] == '0':
-            cond_dict['New Snow'] = '0"'
-        self.conditons_dict = cond_dict
+        if self.cond_dict['New Snow'] == '0':
+            self.cond_dict['New Snow'] += '"'
+
 
     def update(self):
         headers = {'User-Agent': 'Mozilla/5.0'}
