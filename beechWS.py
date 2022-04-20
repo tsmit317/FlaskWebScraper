@@ -12,9 +12,6 @@ class Beech():
     
 
     def add_lift(self, beechSoup):
-        print("beechWS: add_lift()")
-        sys.stdout.flush()
-
         beech_sl_tag = beechSoup.find_all('td')
         self.lift_dict = {beech_sl_tag[i].text: 
                 beech_sl_tag[i+1].text 
@@ -22,9 +19,6 @@ class Beech():
 
 
     def add_slope(self, beechSoup):
-        print("beechWS: add_slope()")
-        sys.stdout.flush()
-
         beech_sl_tag = beechSoup.find_all('td')
         self.slope_dict = {beech_sl_tag[i].get_text(strip = True): 
                     beech_sl_tag[i+1].get_text(strip = True) 
@@ -32,9 +26,6 @@ class Beech():
         
 
     def add_conditions(self, beechSoup):
-        print("beechWS: add_conditions()")
-        sys.stdout.flush()
-        
         beechConditionsTags = beechSoup.find('div', class_ = 'overview').find_all('div')
         cond_dict = {i.find('span').get_text(): 
                 str(i.find(text=True, recursive=False)).replace('\n\t\t\t', '').replace('\t\t\t','').replace('\n', 'N/A') 
@@ -53,9 +44,6 @@ class Beech():
         self.conditons_dict = cond_dict
 
     def update(self):
-        print("beechWS: update()")
-        sys.stdout.flush()
-
         headers = {'User-Agent': 'Mozilla/5.0'}
         beechWPResponse = requests.get('https://www.beechmountainresort.com/mountain/winter-trail-map/', headers=headers)
         beechWP = beechWPResponse.content

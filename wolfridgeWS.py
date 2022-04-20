@@ -13,9 +13,6 @@ class Wolf():
 
 
     def add_lift(self, wolfSoup):
-        print("wolfridgeWS: add_lift()")
-        sys.stdout.flush()
-
         wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
         self.lift_dict = {row.find('td', class_='column-2').text: 
                 row.find('td', class_='column-3').text.title() 
@@ -23,9 +20,6 @@ class Wolf():
 
 
     def add_slope(self, wolfSoup):
-        print("wolfridgeWS: add_slope()")
-        sys.stdout.flush() 
-
         wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr') 
         self.slope_dict = {row.find('td', class_ = 'column-3').get_text(): 
                 row.find('td', class_ = 'column-4').get_text().title() 
@@ -33,9 +27,6 @@ class Wolf():
 
 
     def add_conditions(self, wolfSoup):
-        print("wolfridgeWS: add_conditions()")
-        sys.stdout.flush()
-
         wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
         wr_conditions_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
                                 else row.find('td', class_ = 'column-1').get_text(strip = True).replace(':', '')): row.find('td', class_ = 'column-2').get_text().title() 
@@ -59,8 +50,6 @@ class Wolf():
 
     
     def update(self):
-        print("wolfridgeWS: update()")
-        sys.stdout.flush()
         headers = {'User-Agent': 'Mozilla/5.0'}
         wolfWPResponse = requests.get('https://skiwolfridgenc.com/the-mountain/snow-report', headers=headers)
         wolfWP = wolfWPResponse.content

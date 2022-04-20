@@ -20,10 +20,6 @@ class Sugar():
     
     #TODO: This looks ugly
     def add_conditions(self, sugarSoupMain): 
-        print("suagrWS: add_conditions()")
-        sys.stdout.flush()
-
-      
         #Sugar took down the usual conditions table after the slopes closed for the season.
         #Simply checks if the table is there. If not, just adds weather and status that the ski slopes are closed
         if not sugarSoupMain.find('table', class_ = "smrcctable"):
@@ -80,8 +76,6 @@ class Sugar():
 
 
     def add_lift(self, sugarTags):
-        print("suagrWS: add_lift()")
-        sys.stdout.flush()
         # Gets Lifts. Had to use next_sibling instead of get_text()
         # Note: .get('alt') might not be accurate. May need to switch to .get('src')
         self.lift_dict = {i.next_sibling.strip(): i.get('alt') for i in sugarTags[0].find_all('img')}
@@ -89,9 +83,6 @@ class Sugar():
 
     # TODO: Clean this up
     def add_slope(self, sugarTags):
-        print("suagrWS: add_slope()")
-        sys.stdout.flush()
-
         sugar_slope_dict = {}
         # Get Black Diamond Runs. These all used .get_text(), so I grouped them together. 
         # Odd indexes were skipped, as they were just labels
@@ -121,8 +112,6 @@ class Sugar():
         self.slope_dict = sugar_slope_dict
 
     def update(self):
-        print("suagrWS: update()")
-        sys.stdout.flush()
         headers = {'User-Agent': 'Mozilla/5.0'}
         sugarWPResponse = requests.get('http://www.skisugar.com/', headers=headers)
         sugarWP = sugarWPResponse.content

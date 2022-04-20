@@ -13,9 +13,6 @@ class App():
 
     # TODO: Fix this monstrosity
     def add_conditions(self, appSoup):
-        print("appWS: add_conditions()")
-        sys.stdout.flush()
-
         conditons_dict = {}            
         for index, i in enumerate(appSoup.find_all('ul', class_ = 'slope-report__details')):
             for j_index, j in enumerate(i.find_all('li')):
@@ -43,9 +40,6 @@ class App():
 
 
     def add_slope(self, appSoup):
-        print("appWS: add_slope()")
-        sys.stdout.flush()
-
         appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
         self.slope_dict =  {i.find('span', class_ = 'slope-report__status-title').get_text():
                 i.find('span', class_ = 'slope-report__status-status').get_text()
@@ -53,9 +47,6 @@ class App():
     
 
     def add_lift(self, appSoup):
-        print("appWS: add_lift()")
-        sys.stdout.flush()
-
         appSlopeUL = appSoup.find_all('ul', class_ = 'slope-report__status')
         self.lift_dict = {i.find('span', class_ = 'slope-report__status-title').get_text():
                 i.find('span', class_ = 'slope-report__status-status').get_text()
@@ -63,9 +54,6 @@ class App():
 
 
     def update(self):
-        print("appWS: update()")
-        sys.stdout.flush()
-
         headers = {'User-Agent': 'Mozilla/5.0 '}
         appWPResponse = requests.get('https://www.appskimtn.com/slope-report', headers=headers)
         appWP = appWPResponse.content
