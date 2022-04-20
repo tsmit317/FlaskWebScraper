@@ -28,6 +28,12 @@ class Cata():
                 cata_conditions_list.append(i.get_text())
         self.conditons_dict = {cata_conditions_list[i+1].title(): cata_conditions_list[i].title() for i in range(0, len(cata_conditions_list), 2)} 
 
+        if self.conditons_dict['Surface'] == "Machine Worked":
+            self.conditons_dict['Surface'] = "Groomed"
+        
+        self.conditons_dict['Snowmaking'] = 'On' if self.conditons_dict['Snowmaking'] == "Yes" else 'Off'
+        self.conditons_dict['Night Skiing'] = 'Open' if self.conditons_dict['Night Skiing'] == "Yes" else 'Closed'
+
 
     def add_slope(self, cataSoup):
         cata_trail_columns =[i.get_text(strip = True) for i in cataSoup.find('table', class_='trails-table').find_all('td')]
@@ -50,20 +56,6 @@ class Cata():
         self.add_slope(cataSoup)
         self.add_lift(cataSoup)
         
-        self.cond_check()
-    
-    def cond_check(self):
-        if self.conditons_dict['Surface'] == "Machine Worked":
-            self.conditons_dict['Surface'] = "Groomed"
-        if self.conditons_dict['Snowmaking'] == "Yes":
-            self.conditons_dict['Snowmaking'] = "On"
-        elif self.conditons_dict['Snowmaking'] == "No":
-            self.conditons_dict['Snowmaking'] = "Off"
-        if self.conditons_dict['Night Skiing'] == "Yes":
-            self.conditons_dict['Night Skiing'] = "Open"
-        elif self.conditons_dict['Night Skiing'] == "No":
-            self.conditons_dict['Night Skiing'] = "Closed"
-
 
     def get_conditions(self):
         return self.conditons_dict
