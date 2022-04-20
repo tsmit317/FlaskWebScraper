@@ -11,7 +11,6 @@ class App():
         self.lift_dict = {}
 
 
-    # TODO: Fix this monstrosity
     def add_conditions(self, appSoup):
         conditons_dict = {}            
         for index, i in enumerate(appSoup.find_all('ul', class_ = 'slope-report__details')):
