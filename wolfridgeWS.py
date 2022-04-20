@@ -28,26 +28,19 @@ class Wolf():
 
     def add_conditions(self, wolfSoup):
         wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
-        wr_conditions_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
+        self.conditons_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
                                 else row.find('td', class_ = 'column-1').get_text(strip = True).replace(':', '')): row.find('td', class_ = 'column-2').get_text().title() 
                                 for row in wr_conditions_table}
 
-        wr_conditions_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}    
+        self.conditons_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}    
 
-        if wr_conditions_dict['New Snow'] == '0':
-            wr_conditions_dict['New Snow'] += '"'
-            
-        if wr_conditions_dict['Snowmaking'] == 'No':
-            wr_conditions_dict['Snowmaking'] = 'Off'
-        elif wr_conditions_dict['Snowmaking'] == 'Yes':
-            wr_conditions_dict['Snowmaking'] = 'On'
-            
-        if wr_conditions_dict['Night Skiing'] == 'No':
-            wr_conditions_dict['Night Skiing'] = 'Closed'
-        elif wr_conditions_dict['Night Skiing'] == 'Yes':
-            wr_conditions_dict['Night Skiing'] = 'Open'
-        self.conditons_dict = wr_conditions_dict
-
+        if self.conditons_dict['New Snow'] == '0':
+            self.conditons_dict['New Snow'] += '"'
+        
+        self.conditons_dict['Snowmaking'] = 'On' if self.conditons_dict['Snowmaking'] == 'Yes' else 'Off'
+        self.conditons_dict['Night Skiing'] = 'Open' if self.conditons_dict['Night Skiing'] == 'Yes' else 'Closed'
+        
+        
     
     def update(self):
         headers = {'User-Agent': 'Mozilla/5.0'}
