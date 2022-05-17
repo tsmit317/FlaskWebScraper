@@ -27,7 +27,7 @@ class Wolf():
 
 
     def add_conditions(self, wolfSoup):
-        wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
+        wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr')
         self.conditons_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
                                 else row.find('td', class_ = 'column-1').get_text(strip = True).replace(':', '')): row.find('td', class_ = 'column-2').get_text().title() 
                                 for row in wr_conditions_table}
