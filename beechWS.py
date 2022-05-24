@@ -6,7 +6,7 @@ class Beech():
 
 
     def __init__(self):
-        self.conditons_dict = {}
+        self.cond_dict = {}
         self.slope_dict = {}
         self.lift_dict = {}
     
@@ -40,6 +40,7 @@ class Beech():
         if self.cond_dict['New Snow'] == '0':
             self.cond_dict['New Snow'] += '"'
 
+        
 
     def update(self):
         headers = {'User-Agent': 'Mozilla/5.0'}
@@ -53,7 +54,7 @@ class Beech():
         
         
     def get_conditions(self):
-        return self.conditons_dict
+        return self.cond_dict
     
 
     def get_slope(self):
