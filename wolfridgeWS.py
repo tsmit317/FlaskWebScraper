@@ -13,14 +13,18 @@ class Wolf():
 
 
     def add_lift(self, wolfSoup):
-        wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
-        self.lift_dict = {row.find('td', class_='column-2').text: 
-                row.find('td', class_='column-3').text.title() 
-                for row in wr_lifts_table}
+        wr_lifts_table = wolfSoup.find('table', attrs= {'id':'tablepress-7'}).find_all('tr')
+        #The first row contains a header tag now for some reason?
+        for i, row in enumerate(wr_lifts_table):
+            if i == 0:
+                self.lift_dict[row.find('th', class_='column-2').get_text()] = row.find('th', class_='column-3').text.title()
+            else:
+                self.lift_dict[row.find('td', class_='column-2').get_text()] = row.find('td', class_='column-3').text.title() 
 
 
     def add_slope(self, wolfSoup):
-        wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr') 
+        wr_slopes_table = wolfSoup.find('table', attrs= {'id':'tablepress-8'}).find_all('tr')
+        
         self.slope_dict = {row.find('td', class_ = 'column-3').get_text(): 
                 row.find('td', class_ = 'column-4').get_text().title() 
                 for row in wr_slopes_table[2:]}
@@ -30,13 +34,23 @@ class Wolf():
         wr_conditions_table = wolfSoup.find('table', attrs= {'id':'tablepress-9'}).find_all('tr')
         self.conditons_dict = {("New Snow"  if row.find('td', class_ = 'column-1').get_text() == 'Natural Snow (Past 24hrs):' 
                                 else row.find('td', class_ = 'column-1').get_text(strip = True).replace(':', '')): row.find('td', class_ = 'column-2').get_text().title() 
-                                for row in wr_conditions_table}
+                                for row in wr_conditions_table[1:]}
 
-        self.conditons_dict = {k: 'N/A' if not v else v for k, v in wr_conditions_dict.items()}    
+        self.conditons_dict = {k: 'N/A' if not v else v for k, v in self.conditons_dict.items()}    
 
+        
+        if 'New Snow' not in self.conditons_dict:
+            self.conditons_dict['New Snow'] = '0"'
+        if 'Snow Making' not in self.conditons_dict:
+            self.conditons_dict['Snow Making'] = 'Off'
+        if 'Night Skiing' not in self.conditons_dict:
+            self.conditons_dict['Night Skiing'] = 'Closed'
+
+       
         if self.conditons_dict['New Snow'] == '0':
             self.conditons_dict['New Snow'] += '"'
         
+       
         self.conditons_dict['Snowmaking'] = 'On' if self.conditons_dict['Snowmaking'] == 'Yes' else 'Off'
         self.conditons_dict['Night Skiing'] = 'Open' if self.conditons_dict['Night Skiing'] == 'Yes' else 'Closed'
         
@@ -44,7 +58,8 @@ class Wolf():
     
     def update(self):
         headers = {'User-Agent': 'Mozilla/5.0'}
-        wolfWPResponse = requests.get('https://skiwolfridgenc.com/the-mountain/snow-report', headers=headers)
+
+        wolfWPResponse = requests.get('https://skiwolfridgenc.com/?page_id=1377', headers=headers)
         wolfWP = wolfWPResponse.content
         wolfSoup = BeautifulSoup(wolfWP, 'html.parser')
         
