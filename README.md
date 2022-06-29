@@ -14,7 +14,7 @@ The frontend is designed using the Bootstrap framework and the app is currently 
 ### Motivation
 
 My initial goal was to learn more about web frameworks, specifically Flask or Django. 
-I thought displaying all NC ski conditions on one page rather than having to check each website individually would be different, and I was curious of what that would look like. 
+I thought displaying all NC ski conditions on one page rather than having to check each website individually would be different, and I was curious to see what it would look like. 
 I ended up choosing Flask over Django due to the website's intended simplicity.
 
 ### Current Issues
